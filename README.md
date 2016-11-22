@@ -8,7 +8,7 @@ My vps server's ansible
     pacman -S ansible
 	cd git
 	git clone git@github.com:masasam/ansible-vps.git
-
+	
 ## ゲスト側準備
 ---
 
@@ -16,8 +16,11 @@ My vps server's ansible
 ゲストテスト環境の systemd-nspawn  
 以下 systemd-nspawn は vps では ssh で読み替えて構築する  
 
-起動  
+テスト用コンテナを用意
 
+	sudo pacman -S arch-install-scripts
+	mkdir systemdcontainer
+	sudo pacstrap -i -c -d ~/systemdcontainer base base-devel --ignore linux
     sudo systemd-nspawn -b -D ~/systemdcontainer --bind=/var/cache/pacman/pkg
 
 ゲストも Arch Linux なので  
