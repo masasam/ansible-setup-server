@@ -1,0 +1,2 @@
+- name: install mariadb
+  pacman: name=mariadb state=present

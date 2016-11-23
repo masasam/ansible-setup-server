@@ -1,10 +1,10 @@
 - hosts: all
   user: ansible
   become: yes
+  roles:
+    - nginx
+    - mariadb
   tasks:
-    - name: install sbcl
-      pacman: name=sbcl state=present
-
     - name: install all
       pacman: name={{ item }} state=installed
       with_items:

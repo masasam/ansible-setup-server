@@ -1,0 +1,6 @@
+- hosts: all
+  user: ansible
+  become: yes
+  tasks:
+    - name: install all
+      pacman: update_cache=yes upgrade=yes
