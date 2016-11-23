@@ -2,5 +2,5 @@
   user: ansible
   become: yes
   tasks:
-    - name: install all
+    - name: update all
       pacman: update_cache=yes upgrade=yes
