@@ -1,4 +1,0 @@
-[vps]
-pansymade.net
-[testserver]
-archcontainer ansible_python_interpreter=python2

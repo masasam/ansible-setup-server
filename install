@@ -1,0 +1,6 @@
+- hosts: all
+  user: ansible
+  become: yes
+  tasks:
+# Install package foo
+  - pacman: name=sbcl state=present
