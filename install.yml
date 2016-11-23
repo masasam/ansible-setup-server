@@ -2,5 +2,12 @@
   user: ansible
   become: yes
   tasks:
-# Install package foo
-  - pacman: name=sbcl state=present
+    - name: install sbcl
+      pacman: name=sbcl state=present
+
+    - name: install all
+      pacman: name={{ item }} state=installed
+      with_items:
+        - vim
+        - zsh
+        - git
