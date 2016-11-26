@@ -4,6 +4,7 @@
   roles:
     - nginx
     - mariadb
+    - postfix
   tasks:
     - name: install all
       pacman: name={{ item }} state=installed

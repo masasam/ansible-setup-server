@@ -1,0 +1,4 @@
+- name: install zshrc
+  copy:
+    src: zshrc
+    dest: ~/.zshrc

@@ -1,0 +1,4 @@
+- name: install postfix
+  #become: yes
+  #become_user: postfix
+  pacman: name=postfix state=present
