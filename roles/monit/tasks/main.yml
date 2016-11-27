@@ -1,4 +1,6 @@
 - name: install monit
-  # copy:
-  #   src: vimrc
-  #   dest: ~/.vimrc
+  pacman: name=monit state=present
+# - name: install postfix
+#   copy:
+#     src: vimrc
+#     dest: ~/.vimrc

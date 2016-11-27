@@ -1,3 +1,5 @@
+- name: install vim
+  pacman: name=vim state=present
 - name: install vimrc
   copy:
     src: vimrc

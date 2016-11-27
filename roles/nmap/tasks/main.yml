@@ -1,0 +1,6 @@
+- name: install nmap
+  pacman: name=nmap state=present
+# - name: install postfix
+#   copy:
+#     src: vimrc
+#     dest: ~/.vimrc

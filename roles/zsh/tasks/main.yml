@@ -1,3 +1,5 @@
+- name: install zsh
+  pacman: name=zsh state=present
 - name: install zshrc
   copy:
     src: zshrc
