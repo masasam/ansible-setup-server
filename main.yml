@@ -8,6 +8,12 @@
     - vim
     - zsh
     - git
+    - cyrus-sasl
+    - dovecot
+    - monit
+    - nmap
+    - ntp
+    - certbot
   tasks:
     - name: install all
       pacman: name={{ item }} state=installed

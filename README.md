@@ -46,6 +46,14 @@ root に戻って
 	systemctl enable sshd
 	systemctl start sshd
 
+ホスト名を設定
+
+    hostname archcontainer
+
+vim /etc/hosts
+
+    127.0.0.1   localhost.localdomain   localhost archcontainer
+
 #### root になれるユーザを wheel グループに属するユーザのみにする
 
     usermod -G wheel ansible
