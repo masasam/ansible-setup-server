@@ -1,0 +1,4 @@
+- name: install monit
+  # copy:
+  #   src: vimrc
+  #   dest: ~/.vimrc

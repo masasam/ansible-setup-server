@@ -1,0 +1,4 @@
+- name: install dovecot
+  # copy:
+  #   src: vimrc
+  #   dest: ~/.vimrc

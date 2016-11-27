@@ -5,10 +5,17 @@
     - nginx
     - mariadb
     - postfix
+    - vim
+    - zsh
+    - git
   tasks:
     - name: install all
       pacman: name={{ item }} state=installed
-      with_items:
-        - vim
-        - zsh
-        - git
+      with_items:        
+        - bash-completion
+        - zsh-completions
+        - tig
+        - wget
+        - htop
+        - rsync
+        - tmux
