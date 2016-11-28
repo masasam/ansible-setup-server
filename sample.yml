@@ -1,3 +1,4 @@
+# pacmanのサンプル
 # Install package foo
 - pacman: name=foo state=present
 
@@ -21,3 +22,158 @@
 
 # Run the equivalent of "pacman -Rdd", force remove package baz
 - pacman: name=baz state=absent force=yes
+
+
+  
+# yumのサンプル
+- name: install the latest version of Apache
+  yum: name=httpd state=latest
+
+- name: remove the Apache package
+  yum: name=httpd state=absent
+
+- name: install the latest version of Apache from the testing repo
+  yum: name=httpd enablerepo=testing state=present
+
+- name: upgrade all packages
+  yum: name=* state=latest
+
+- name: install the nginx rpm from a remote repo
+  yum: name=http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm state=present
+
+- name: install nginx rpm from a local file
+  yum: name=/usr/local/src/nginx-release-centos-6-0.el6.ngx.noarch.rpm state=present
+
+- name: install the 'Development tools' package group
+  yum: name="@Development tools" state=present
+
+  
+
+# テンプレートのサンプル
+# 埋め込んだ変数を置換してファイルをリモートに配置する
+# ホスト名などのようにサーバによって記載する内容が変わるものを処理するのに有用
+# http://docs.ansible.com/ansible/template_module.html
+# Example from Ansible Playbooks
+- template: src=/mytemplates/foo.j2 dest=/etc/file.conf owner=bin group=wheel mode=0644
+
+# The same example, but using symbolic modes equivalent to 0644
+- template: src=/mytemplates/foo.j2 dest=/etc/file.conf owner=bin group=wheel mode="u=rw,g=r,o=r"
+
+# Copy a new "sudoers" file into place, after passing validation with visudo
+- template: src=/mine/sudoers dest=/etc/sudoers validate='visudo -cf %s'
+
+
+
+# コピーのサンプル
+# ローカル(Ansibleコマンド実行端末)に存在するファイルをリモート(Ansible実行対象のサーバ)に配置するためのモジュール
+# http://docs.ansible.com/ansible/copy_module.html
+# Example from Ansible Playbooks
+- copy: src=/srv/myfiles/foo.conf dest=/etc/foo.conf owner=foo group=foo mode=0644
+
+# The same example as above, but using a symbolic mode equivalent to 0644
+- copy: src=/srv/myfiles/foo.conf dest=/etc/foo.conf owner=foo group=foo mode="u=rw,g=r,o=r"
+
+# Another symbolic mode example, adding some permissions and removing others
+- copy: src=/srv/myfiles/foo.conf dest=/etc/foo.conf owner=foo group=foo mode="u+rw,g-wx,o-rwx"
+
+# Copy a new "ntp.conf file into place, backing up the original if it differs from the copied version
+- copy: src=/mine/ntp.conf dest=/etc/ntp.conf owner=root group=root mode=644 backup=yes
+
+# Copy a new "sudoers" file into place, after passing validation with visudo
+- copy: src=/mine/sudoers dest=/etc/sudoers validate='visudo -cf %s'
+
+
+
+# fileモジュールのサンプル
+# リモートのファイル/ディレクトリの設定を実施するモジュールです。
+# 具体的には、シンボリックリンクの作成やファイルのパーミッション変更などが実施できます。
+# http://docs.ansible.com/ansible/file_module.html
+# change file ownership, group and mode. When specifying mode using octal numbers, first digit should always be 0.
+- file: path=/etc/foo.conf owner=foo group=foo mode=0644
+- file: src=/file/to/link/to dest=/path/to/symlink owner=foo group=foo state=link
+- file: src=/tmp/{{ item.src }} dest={{ item.dest }} state=link
+  with_items:
+    - { src: 'x', dest: 'y' }
+    - { src: 'z', dest: 'k' }
+
+# touch a file, using symbolic modes to set the permissions (equivalent to 0644)
+- file: path=/etc/foo.conf state=touch mode="u=rw,g=r,o=r"
+
+# touch the same file, but add/remove some permissions
+- file: path=/etc/foo.conf state=touch mode="u+rw,g-wx,o-rwx"
+
+# create a directory if it doesn't exist
+- file: path=/etc/some_directory state=directory mode=0755
+
+
+
+# scriptのサンプル
+# http://docs.ansible.com/ansible/script_module.html
+# Example from Ansible Playbooks
+- script: /some/local/script.sh --some-arguments 1234
+
+# Run a script that creates a file, but only if the file is not yet created
+- script: /some/local/create_file.sh --some-arguments 1234 creates=/the/created/file.txt
+
+# Run a script that removes a file, but only if the file is not yet removed
+- script: /some/local/remove_file.sh --some-arguments 1234 removes=/the/removed/file.txt
+
+
+
+# shellのサンプル
+# http://docs.ansible.com/ansible/shell_module.html
+# Execute the command in remote shell; stdout goes to the specified
+# file on the remote.
+- shell: somescript.sh >> somelog.txt
+
+# Change the working directory to somedir/ before executing the command.
+- shell: somescript.sh >> somelog.txt chdir=somedir/
+
+# You can also use the 'args' form to provide the options. This command
+# will change the working directory to somedir/ and will only run when
+# somedir/somelog.txt doesn't exist.
+- shell: somescript.sh >> somelog.txt
+  args:
+    chdir: somedir/
+    creates: somelog.txt
+
+# Run a command that uses non-posix shell-isms (in this example /bin/sh
+# doesn't handle redirection and wildcards together but bash does)
+- shell: cat < /tmp/*txt
+  args:
+    executable: /bin/bash
+
+
+
+# リプレイスのサンプル
+# http://docs.ansible.com/ansible/replace_module.html
+- replace: dest=/etc/hosts regexp='(\s+)old\.host\.name(\s+.*)?$' replace='\1new.host.name\2' backup=yes
+
+- replace: dest=/home/jdoe/.ssh/known_hosts regexp='^old\.host\.name[^\n]*\n' owner=jdoe group=jdoe mode=644
+
+- replace: dest=/etc/apache/ports regexp='^(NameVirtualHost|Listen)\s+80\s*$' replace='\1 127.0.0.1:8080' validate='/usr/sbin/apache2ctl -f %s -t'
+
+
+
+# userのサンプル
+http://docs.ansible.com/ansible/user_module.html
+# Add the user 'johnd' with a specific uid and a primary group of 'admin'
+- user: name=johnd comment="John Doe" uid=1040 group=admin
+
+# Add the user 'james' with a bash shell, appending the group 'admins' and 'developers' to the user's groups
+- user: name=james shell=/bin/bash groups=admins,developers append=yes
+
+# Remove the user 'johnd'
+- user: name=johnd state=absent remove=yes
+
+# Create a 2048-bit SSH key for user jsmith in ~jsmith/.ssh/id_rsa
+- user: name=jsmith generate_ssh_key=yes ssh_key_bits=2048 ssh_key_file=.ssh/id_rsa
+
+# added a consultant whose account you want to expire
+- user: name=james18 shell=/bin/zsh groups=developers expires=1422403387
+
+
+
+# gitのサンプル
+git clone の処理を行う
+- git: repo=ssh://git@github.com/mylogin/hello.git dest=/home/mylogin/hello
