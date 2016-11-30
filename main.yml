@@ -12,7 +12,6 @@
     - dovecot
     - monit
     - nmap
-    - ntp
     - certbot
   tasks:
     - name: install all
