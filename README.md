@@ -30,16 +30,17 @@ My vps server's ansible
 arch linux は python3 がデフォルトなので  
 (centos8 も python3 になるようなので気をつける)  
 
-	pacman -Sy python2
+	pacman -Sy python2 zsh
 
 ansible で利用する user を作成  
 
-    useradd -m -G wheel -s /bin/bash ansible
+    useradd -m -G wheel -s /bin/zsh ansible
 	su - ansible
+	ssh-keygen -t rsa -b 4096
 	cd .ssh/
-	ssh-keygen -t rsa -b 4096	
 	mv id_rsa.pub authorized_keys
 	chmod 600 authorized_keys
+	vi authorized_keys ← id_rsa.pub キーを登録
 
 root に戻って  
 	
@@ -50,7 +51,7 @@ root に戻って
 
     hostname archcontainer
 
-vim /etc/hosts
+vi /etc/hosts
 
     127.0.0.1   localhost.localdomain   localhost archcontainer
 
@@ -58,7 +59,7 @@ vim /etc/hosts
 
     usermod -G wheel ansible
 
-vim /etc/pam.d/su  
+vi /etc/pam.d/su  
 
     # コメントアウトを外す
     auth required pam_wheel.so use_uid
@@ -66,18 +67,17 @@ vim /etc/pam.d/su
 
 #### sudo が使えるユーザ（グループ）を設定する
 
-export EDITOR=vim  
 visudo  
 
     #Defaults    requiretty(centos の場合のみコメントアウトしておく)
 
     #ansible に sudo 権限を与えておく(su できなくなったときの保険のため)
-    ## Allow root to run any commands anywhere
+    ## User privilege specification
     root ALL=(ALL) ALL
     ansible ALL=(ALL) ALL
 
     ##wheel グループに sudo 権限を与える
-    # Allows people in group wheel to run all commands
+    # Uncomment to allow members of group wheel to execute any command
     %wheel ALL=(ALL) ALL
 
     ##ansible だけはパスワード無で sudo できるようにする
