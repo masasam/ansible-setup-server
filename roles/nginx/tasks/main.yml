@@ -1,8 +1,8 @@
 - name: install nginx
   pacman: name=nginx state=present
-# - name: install nginx.conf
-#   copy:
-#     src: nginx.conf
-#     dest: /etc/nginx/nginx.conf
+- name: install nginx.conf
+  copy:
+    src: nginx.conf
+    dest: /etc/nginx/nginx.conf
 - name: nginx start
   systemd: state=started name=nginx
