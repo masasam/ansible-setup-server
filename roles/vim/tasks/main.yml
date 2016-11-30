@@ -1,6 +1,13 @@
 - name: install vim
   pacman: name=vim state=present
-- name: install vimrc
+- name: install vimrc at ansible
+  become: yes
+  become_user: ansible
+  copy:
+    src: vimrc
+    dest: ~/.vimrc
+- name: install vimrc at root
+  become: yes
   copy:
     src: vimrc
     dest: ~/.vimrc

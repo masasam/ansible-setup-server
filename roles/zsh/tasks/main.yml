@@ -1,12 +1,12 @@
 - name: install zsh
   pacman: name=zsh state=present
-- name: install zshrc at root
+- name: install zshrc at ansible
   become: yes
   become_user: ansible
   copy:
     src: zshrc
     dest: ~/.zshrc
-- name: install zshrc at ansible
+- name: install zshrc at root
   become: yes
   copy:
     src: zshrc
