@@ -1,2 +1,0 @@
-- name: ntp
-  shell: timedatectl set-ntp true
