@@ -34,6 +34,7 @@ dumb | emacs)
 esac
 
 
+alias ls='ls --color=auto'
 alias ll='ls -al'
 alias du="du -h"
 alias df="df -h"
