@@ -1,0 +1,8 @@
+- systemd:
+    name: nginx
+    state: started
+    enabled: True
+- systemd:
+    name: iptables
+    state: started
+    enabled: True

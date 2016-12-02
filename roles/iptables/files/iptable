@@ -1,0 +1,47 @@
+# iptablesのベースを作る
+iptables-restore < /etc/iptables/empty.rules
+iptables -N TCP
+iptables -N UDP
+iptables -P FORWARD DROP
+iptables -P OUTPUT ACCEPT
+iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+iptables -P INPUT DROP
+# (lo) インターフェイスからのトラフィックを全て許可
+iptables -A INPUT -i lo -j ACCEPT
+# INVALID ステートに一致する全てのトラフィックを破棄
+iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
+# ping許可
+iptables -A INPUT -p icmp --icmp-type 8 -m conntrack --ctstate NEW -j ACCEPT
+# syn
+iptables -A INPUT -p udp -m conntrack --ctstate NEW -j UDP
+iptables -A INPUT -p tcp --syn -m conntrack --ctstate NEW -j TCP
+# とどかないパケット
+iptables -A INPUT -p udp -j REJECT --reject-with icmp-port-unreachable
+iptables -A INPUT -p tcp -j REJECT --reject-with tcp-reset
+iptables -A INPUT -j REJECT --reject-with icmp-proto-unreachable
+# ssh
+iptables -A TCP -p tcp --dport 22 -j ACCEPT
+# http
+iptables -A TCP -p tcp --dport 80 -j ACCEPT
+# https
+iptables -A TCP -p tcp --dport 443 -j ACCEPT
+# dns
+iptables -A UDP -p udp --dport 53 -j ACCEPT
+# syn scan
+iptables -I TCP -p tcp -m recent --update --seconds 60 --name TCP-PORTSCAN -j REJECT --reject-with tcp-reset
+# smtp
+iptables -A TCP -p tcp --dport 25 -j ACCEPT
+# smtps
+iptables -A TCP -p tcp --dport 465 -j ACCEPT
+# pop3
+iptables -A TCP -p tcp --dport 110 -j ACCEPT
+# pop3s
+iptables -A TCP -p tcp --dport 995 -j ACCEPT
+# imap
+iptables -A TCP -p tcp --dport 143 -j ACCEPT
+# imaps
+iptables -A TCP -p tcp --dport 993 -j ACCEPT
+# Outbound Port25
+iptables -A TCP -p tcp --dport 587 -j ACCEPT
+
+iptables-save > /etc/iptables/iptables.rules

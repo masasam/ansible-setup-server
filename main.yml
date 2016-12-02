@@ -13,6 +13,7 @@
     - monit
     - nmap
     - certbot
+    - systemd
   tasks:
     - name: install all
       pacman: name={{ item }} state=installed
