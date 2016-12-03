@@ -5,4 +5,7 @@
     src: nginx.conf
     dest: /etc/nginx/nginx.conf
 - name: nginx start
-  systemd: state=started name=nginx
+  systemd:
+    name: nginx
+    state: started
+    enabled: True
