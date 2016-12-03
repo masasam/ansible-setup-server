@@ -12,6 +12,7 @@
     - dovecot
     - monit
     - nmap
+    - iptables
   tasks:
     - name: install all
       pacman: name={{ item }} state=installed
