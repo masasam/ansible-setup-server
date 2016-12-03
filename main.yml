@@ -12,7 +12,6 @@
     - dovecot
     - monit
     - nmap
-    - certbot
     - systemd
   tasks:
     - name: install all

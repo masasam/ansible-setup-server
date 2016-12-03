@@ -1,0 +1,12 @@
+- name: install certbot
+  pacman: name=certbot state=present
+- name: nginx directory
+  file: path=/home/html state=directory owner=ansible group=ansible mode=0755
+- name: nginx directory
+  file: path=/home/blog state=directory owner=ansible group=ansible mode=0755
+- name: certbot pansymade.net
+  become: yes
+  command: certbot certonly --email info@pansymade.net --webroot -w /home/html/ -d pansymade.net --agree-tos --keep-until-expiring --non-interactive
+- name: certbot masablog.pansymade.net
+  become: yes
+  command: certbot certonly --email info@pansymade.net --webroot -w /home/blog/ -d masablog.pansymade.net --agree-tos --keep-until-expiring --non-interactive
