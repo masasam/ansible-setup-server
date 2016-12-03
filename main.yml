@@ -12,7 +12,6 @@
     - dovecot
     - monit
     - nmap
-    - systemd
   tasks:
     - name: install all
       pacman: name={{ item }} state=installed
