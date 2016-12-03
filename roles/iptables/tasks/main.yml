@@ -1,0 +1,8 @@
+- name: install /etc/iptables/iptables.rules
+  become: yes
+  copy: src=iptables.rules dest=/etc/iptables/iptables.rules owner=root group=root mode=644 backup=yes
+- name: systemctl enable iptables
+  systemd:
+    name: iptables
+    state: started
+    enabled: True
