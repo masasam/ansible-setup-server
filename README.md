@@ -49,11 +49,11 @@ root に戻って
 
 ホスト名を設定
 
-    hostname archcontainer
+    hostname archtest
 
 vi /etc/hosts
 
-    127.0.0.1   localhost.localdomain   localhost archcontainer
+    127.0.0.1   localhost.localdomain   localhost archtest
 
 #### root になれるユーザを wheel グループに属するユーザのみにする
 
@@ -95,10 +95,10 @@ ssh でつながるようになったから次回以降はバックグラウン�
 
 .ssh/config に以下を設定して
 
-	Host archcontainer
+	Host archtest
                         HostName localhost
                         User ansible
 
 ssh でコンテナにログイン
 
-	ssh archcontainer
+	ssh archtest
