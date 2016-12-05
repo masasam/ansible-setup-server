@@ -1,2 +1,6 @@
 - name: install mariadb
   pacman: name=mariadb state=present
+- name: deploy my.conf
+  copy:
+    src: my.conf
+    dest: /etc/mysql/my.cnf
