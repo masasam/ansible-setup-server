@@ -13,6 +13,7 @@
     - monit
     - nmap
     - iptables
+    - certbot
   tasks:
     - name: install all
       pacman: name={{ item }} state=installed
