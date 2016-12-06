@@ -7,10 +7,13 @@
   tasks:
     - name: install mariadb
       pacman: name=mariadb state=present
+      when: ansible_os_family == 'Archlinux'
     - name: install python-pexpect
       pacman: name=python-pexpect state=present
+      when: ansible_os_family == 'Archlinux'
     - name: install python2-pexpect
       pacman: name=python2-pexpect state=present
+      when: ansible_os_family == 'Archlinux'
     - name: mariadb init
       become: yes
       command: mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql

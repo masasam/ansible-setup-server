@@ -1,5 +1,6 @@
 - name: install certbot
   pacman: name=certbot state=present
+  when: ansible_os_family == 'Archlinux'
 - name: nginx directory
   file: path=/home/html state=directory owner=ansible group=ansible mode=0755
 - name: nginx directory

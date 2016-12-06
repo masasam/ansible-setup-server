@@ -1,5 +1,6 @@
 - name: install vim
   pacman: name=vim state=present
+  when: ansible_os_family == 'Archlinux'
 - name: install vimrc at ansible
   become: yes
   become_user: ansible

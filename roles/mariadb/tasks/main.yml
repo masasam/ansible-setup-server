@@ -1,5 +1,6 @@
 - name: install mariadb
   pacman: name=mariadb state=present
+  when: ansible_os_family == 'Archlinux'
 - name: deploy my.conf
   copy:
     src: my.conf

@@ -1,5 +1,6 @@
 - name: install zsh
   pacman: name=zsh state=present
+  when: ansible_os_family == 'Archlinux'
 - name: install zshrc at ansible
   become: yes
   become_user: ansible
