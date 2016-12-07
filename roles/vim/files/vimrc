@@ -9,7 +9,7 @@ set number
 set title
 set hidden
 set showmatch
-set noexpandtab
+set expandtab
 set tabstop=4
 set shiftwidth=4
 set smartindent
@@ -33,3 +33,7 @@ filetype plugin indent on
 syntax enable
 syntax on
 highlight StatusLine term=none cterm=none ctermfg=white ctermbg=black
+let _curfile=expand("%:r")
+if _curfile == 'Makefile'
+  set noexpandtab
+endif
