@@ -1,6 +1,9 @@
 set encoding=utf-8
-set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
+set fileencoding=utf-8
+set fileencodings=ucs-boms,utf-8,euc-jp,cp932
 set fileformats=unix,dos,mac
+set ambiwidth=double
+set wildmenu
 set clipboard=unnamedplus
 set number
 set title
