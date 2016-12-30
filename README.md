@@ -1,11 +1,9 @@
 # ansible-vps
 
----
 My vps server's ansible  
 
 ## ansible サーバー
 
----
 ホストは Arch Linux なので  
 
     pacman -S ansible
@@ -13,8 +11,6 @@ My vps server's ansible
 	git clone git@github.com:masasam/ansible-vps.git
 	
 ## テスト用ゲストコンテナをローカルに作成
-
----
 
 ゲスト環境は本番環境の vps と  
 ゲストテスト環境の systemd-nspawn  
@@ -61,8 +57,6 @@ vi /etc/hosts
 
 #### root になれるユーザを wheel グループに属するユーザのみにする
 
----
-
     usermod -G wheel ansible
 
 vi /etc/pam.d/su  
@@ -72,7 +66,6 @@ vi /etc/pam.d/su
 
 #### sudo が使えるユーザ（グループ）を設定する
 
----
 visudo  
 
     #Defaults    requiretty(centos の場合のみコメントアウトしておく)
@@ -111,8 +104,6 @@ ssh でコンテナにログイン
 
 ## 本番サーバー用の準備手順
 
----
-
 root で ansible で利用する user を作成  
 	
     useradd -m -G wheel -s /bin/zsh ansible
@@ -128,17 +119,15 @@ root に戻って
 	systemctl enable sshd
 	systemctl start sshd
 
-ホスト名を設定
+ホスト名を設定  
 
     hostname archtest
 
-vi /etc/hosts
+vi /etc/hosts  
 
     127.0.0.1   localhost.localdomain   localhost archtest
 
 #### root になれるユーザを wheel グループに属するユーザのみにする
-
----
 
     usermod -G wheel ansible
 
@@ -148,8 +137,6 @@ vi /etc/pam.d/su
     auth required pam_wheel.so use_uid
 
 #### sudo が使えるユーザ（グループ）を設定する
-
----
 
 visudo  
 
@@ -170,7 +157,5 @@ visudo
     %wheel ALL=(ALL) NOPASSWD: ALL
 
 ## 実行
-
----
 
     ansible-playbook main.yml --extra-vars "domain=pansymade.net host=archlinux"
