@@ -1,3 +1,15 @@
+#変数入りのファイルを用意します。
+vi files/file.conf
+{{ project_name }}
+
+#プレイブックに下記の様な行を追加します。
+vi playbook.yml
+- template: src=files/file.conf dest=/etc/file.conf mode=0644
+
+#プレイブックを実行します。
+ansible-playbook playbook.yml --extra-vars "project_name=test-project"
+
+
 # pacmanのサンプル
 # Install package foo
 - pacman: name=foo state=present
