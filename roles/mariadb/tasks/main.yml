@@ -5,3 +5,8 @@
   copy:
     src: my.conf
     dest: /etc/mysql/my.cnf
+- name: systemctl enable mariadb
+  systemd:
+    name: mariadb
+    state: started
+    enabled: True

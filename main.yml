@@ -8,7 +8,6 @@
     - vim
     - zsh
     - git
-    - cyrus-sasl
     - dovecot
     - monit
     - nmap
