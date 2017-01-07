@@ -1,7 +1,8 @@
 - name: install dovecot
   pacman: name=dovecot state=present
   when: ansible_os_family == 'Archlinux'
-# - name: install postfix
-#   copy:
-#     src: vimrc
-#     dest: ~/.vimrc
+- name: systemctl enable dovecot
+  systemd:
+    name: dovecot
+    state: started
+    enabled: True

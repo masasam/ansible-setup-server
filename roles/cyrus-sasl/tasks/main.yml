@@ -1,7 +1,0 @@
-- name: install cyrus-sasl
-  pacman: name=cyrus-sasl state=present
-  when: ansible_os_family == 'Archlinux'
-# - name: install postfix
-#   copy:
-#     src: vimrc
-#     dest: ~/.vimrc
