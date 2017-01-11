@@ -158,4 +158,4 @@ visudo
 
 ## 実行
 
-    ansible-playbook main.yml --extra-vars "domain=pansymade.net host=archlinux"
+	ansible-playbook main.yml --extra-vars "hostname=archlinux domain=pansymade.net"
