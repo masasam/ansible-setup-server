@@ -1,7 +1,7 @@
 - name: install nginx
   pacman: name=nginx state=present
   when: ansible_os_family == 'Archlinux'
-- name: install nginx.conf
+- name: deploy nginx.conf
   copy:
     src: nginx.conf
     dest: /etc/nginx/nginx.conf

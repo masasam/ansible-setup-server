@@ -1,13 +1,13 @@
 - name: install zsh
   pacman: name=zsh state=present
   when: ansible_os_family == 'Archlinux'
-- name: install zshrc at ansible
+- name: deploy zshrc at ansible
   become: yes
   become_user: ansible
   copy:
     src: zshrc
     dest: ~/.zshrc
-- name: install zshrc at root
+- name: deploy zshrc at root
   become: yes
   copy:
     src: zshrc

@@ -1,13 +1,13 @@
 - name: install vim
   pacman: name=vim state=present
   when: ansible_os_family == 'Archlinux'
-- name: install vimrc at ansible
+- name: deploy vimrc at ansible
   become: yes
   become_user: ansible
   copy:
     src: vimrc
     dest: ~/.vimrc
-- name: install vimrc at root
+- name: deploy vimrc at root
   become: yes
   copy:
     src: vimrc
