@@ -2,8 +2,6 @@
 - hosts: dbserver
   user: ansible
   become: yes
-  vars:
-    password: "password"
   tasks:
     - name: install mariadb
       pacman: name=mariadb state=present
@@ -25,8 +23,8 @@
         responses:
           "Enter current password for root \\(enter for none\\): " : ""
           "Set root password\\? \\[Y\\/n\\] " : "Y"
-          "New password: " : "{{ password }}"
-          "Re-enter new password: " : "{{ password }}"
+          "New password: " : "{{ mariadb-rootpassword }}"
+          "Re-enter new password: " : "{{ mariadb-rootpassword }}"
           "Remove anonymous users\\?" : "y"
           "Disallow root login remotely\\?" : "y"
           "Remove test database and access to it\\?" : "y"
