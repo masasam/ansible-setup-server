@@ -160,7 +160,13 @@ visudo
 
 	ansible-playbook main.yml --extra-vars "@private.yml" --ask-vault-pass
 
+ansible.cfg に以下を設定すると --ask-vault-pass オプションを付けなくてもよい  
+
+    [defaults]
+    ask_vault_pass = true
+
 private.yml に変数とパスワードを書いておくと利用できる  
 private.yml はあらかじめ以下のコマンドで暗号化しておく  
 
 	ansible-vault encrypt private.yml 
+
