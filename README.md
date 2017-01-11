@@ -158,4 +158,9 @@ visudo
 
 ## 実行
 
-	ansible-playbook main.yml --extra-vars "hostname=archlinux domain=pansymade.net"
+	ansible-playbook main.yml --extra-vars "@private.yml" --ask-vault-pass
+
+private.yml に変数とパスワードを書いておくと利用できる  
+private.yml はあらかじめ以下のコマンドで暗号化しておく  
+
+	ansible-vault encrypt private.yml 

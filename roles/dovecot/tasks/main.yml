@@ -6,3 +6,7 @@
     name: dovecot
     state: started
     enabled: True
+- name: render dovecot-passwd
+  template:
+    src=templates/passwd.j2
+    dest=/etc/dovecot/passwd
