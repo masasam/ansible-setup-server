@@ -125,9 +125,9 @@ server {
 server {
     listen 443 default ssl;
     ssl on;
-    # $B%5!<%P>ZL@=q!J%5!<%P>ZL@=q$KCf4V(BCA$B>ZL@=q$rO"7k$7$?$b$N!K(B
+    # サーバ証明書（サーバ証明書に中間CA証明書を連結したもの）
     ssl_certificate      /etc/letsencrypt/live/{{ domain }}/fullchain.pem;
-    # $BHkL)80(B
+    # 秘密鍵
     ssl_certificate_key  /etc/letsencrypt/live/{{ domain }}/privkey.pem;  
 
     server_name {{ domain }};
@@ -151,9 +151,9 @@ server {
     listen 443;
     server_name {{ subdomain }};
     ssl on;
-    # $B%5!<%P>ZL@=q!J%5!<%P>ZL@=q$KCf4V(BCA$B>ZL@=q$rO"7k$7$?$b$N!K(B
+    # サーバ証明書（サーバ証明書に中間CA証明書を連結したもの）
     ssl_certificate      /etc/letsencrypt/live/{{ subdomain }}/fullchain.pem;
-    # $BHkL)80(B
+    # 秘密鍵
     ssl_certificate_key  /etc/letsencrypt/live/{{ subdomain }}/privkey.pem;
 
     location / {
