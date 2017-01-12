@@ -7,12 +7,10 @@
     - postfix
     - vim
     - zsh
-    - git
     - dovecot
-    - monit
-    - nmap
     - iptables
     - certbot
+    - monit
   tasks:
     - name: install all
       pacman: name={{ item }} state=installed
@@ -25,3 +23,5 @@
         - htop
         - rsync
         - tmux
+        - nmap
+        - git
