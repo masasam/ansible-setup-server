@@ -10,3 +10,7 @@
   template:
     src=templates/passwd.j2
     dest=/etc/dovecot/passwd
+- name: render dovecot-ssl.conf
+  template:
+    src=templates/10-ssl.conf.j2
+    dest=/etc/dovecot/conf.d/10-ssl.conf
