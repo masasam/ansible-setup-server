@@ -1,0 +1,5 @@
+check process postfix with pidfile /var/spool/postfix/pid/master.pid
+  start program = "/bin/systemctl start postfix"
+  stop program  = "/bin/systemctl stop postfix"
+  if failed host 127.0.0.1 port 25 protocol smtp timeout 30 seconds then restart
+  if 2 restarts within 3 cycles then timeout
