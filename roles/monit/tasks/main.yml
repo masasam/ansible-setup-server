@@ -39,3 +39,8 @@
   template:
     src=templates/mariadb.j2
     dest=/etc/monit.d/mariadb
+- name: systemctl enable monit
+  systemd:
+    name: monit
+    state: started
+    enabled: True
