@@ -172,5 +172,22 @@ private.yml の中身
 	subdomain: 'subdomain.yourdomain'
 	mailroot: 'youremailaddress'
 	monitalert: 'youremailaddress'
-	infopassword: ''
+	infopassword: '913331d8782236a8ecba7764a63aa27b26437fd40ca878d887f11d81245c2c6b'
 	mariadbrootpassword: 'mariadbrootpassword'
+
+infopassword は info@yourdomain のメールアドレスのパスワードになる  
+infopassword の作り方  
+
+    doveadm pw
+	Enter new password: yourpassword
+	Retype new password: yourpassword
+	
+と打つと
+
+	{CRAM-MD5}913331d8782236a8ecba7764a63aa27b26437fd40ca878d887f11d81245c2c6b
+
+がでるので
+
+	infopassword: '913331d8782236a8ecba7764a63aa27b26437fd40ca878d887f11d81245c2c6b'
+
+とする
