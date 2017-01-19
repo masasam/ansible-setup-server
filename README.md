@@ -158,15 +158,19 @@ visudo
 
 ## 実行
 
-	ansible-playbook main.yml --extra-vars "@private.yml" --ask-vault-pass
+	ansible-playbook main.yml --extra-vars "@private.yml"
 
-ansible.cfg に以下を設定すると --ask-vault-pass オプションを付けなくてもよい  
-
-    [defaults]
-    ask_vault_pass = true
-
-private.yml に変数とパスワードを書いておくと利用できる  
+private.yml に変数とパスワードを書いておく  
 private.yml はあらかじめ以下のコマンドで暗号化しておく  
 
-	ansible-vault encrypt private.yml 
+	ansible-vault encrypt private.yml
 
+private.yml の中身  
+
+	hostname: 'hogegoogle'
+	domain: 'yourdomain'
+	subdomain: 'subdomain.yourdomain'
+	mailroot: 'youremailaddress'
+	monitalert: 'youremailaddress'
+	infopassword: ''
+	mariadbrootpassword: 'mariadbrootpassword'
