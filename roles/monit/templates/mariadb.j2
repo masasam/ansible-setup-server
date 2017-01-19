@@ -1,5 +1,5 @@
 check process mariadb with pidfile /var/lib/mysql/{{ hostname }}.pid
-        start program = "/bin/systemctl start mariadb"
-        stop program  = "/bin/systemctl stop mariadb"
-if failed host 127.0.0.1 port 3306 then restart
-if 5 restarts within 5 cycles then timeout
+  start program = "/bin/systemctl start mariadb"
+  stop program  = "/bin/systemctl stop mariadb"
+  if failed host 127.0.0.1 port 3306 then restart
+  if 5 restarts within 5 cycles then timeout
