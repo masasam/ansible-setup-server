@@ -99,6 +99,9 @@ infopassword の作り方
 
 とする
 
+#### サーバーのアップデートだけする playbook
+
+    ansible-playbook update.yml 
 
 ## テスト用ゲストコンテナをローカルに作る
 
