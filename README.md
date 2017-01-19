@@ -1,7 +1,3 @@
-# ansible-vps
-
-My vps server's ansible  
-	
 ## ansible でプロビジョンしたいサーバーを準備
 
 root で ansible で利用する user を作成  
