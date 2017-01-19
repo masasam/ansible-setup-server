@@ -2,6 +2,7 @@
   user: ansible
   become: yes
   roles:
+    - git
     - nginx
     - mariadb
     - postfix
@@ -24,4 +25,3 @@
         - rsync
         - tmux
         - nmap
-        - git
