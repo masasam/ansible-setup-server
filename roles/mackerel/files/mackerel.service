@@ -1,0 +1,13 @@
+[Unit]
+Description=Run mackerel agent
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/mackerel-agent --conf=/etc/mackerel-agent/mackerel-agent.conf
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+RequiredBy=multi-user.target
