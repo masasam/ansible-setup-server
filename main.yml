@@ -3,6 +3,7 @@
   become: yes
   roles:
     - git
+    - go
     - nginx
     - mariadb
     - postfix
