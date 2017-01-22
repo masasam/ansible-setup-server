@@ -1,3 +1,6 @@
+- name: install mackerel
+  become: yes
+  copy: src=mackerel-agent dest=/usr/bin/mackerel-agent owner=root group=root mode=755
 - name: deploy mackerel.service
   become: yes
   copy: src=mackerel.service dest=/usr/lib/systemd/system/mackerel.service owner=root group=root mode=644 backup=yes
