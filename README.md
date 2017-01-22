@@ -70,7 +70,7 @@ private.yml はあらかじめ以下のコマンドで暗号化しておく
 
 private.yml の中身  
 
-	hostname: 'hogegoogle'
+	hostname: 'yourhost'
 	domain: 'yourdomain'
 	subdomain: 'subdomain.yourdomain'
 	mailroot: 'youremailaddress'
@@ -78,6 +78,8 @@ private.yml の中身
 	infopassword: '913331d8782236a8ecba7764a63aa27b26437fd40ca878d887f11d81245c2c6b'
 	mariadbrootpassword: 'mariadbrootpassword'
 	mackerelapikey: 'yourmackerelapikey'
+	dbname: 'yourdbbame'
+	dbpassword: 'yourdbpassword'
 
 infopassword は info@yourdomain のメールアドレスのパスワードになる  
 infopassword の作り方  
