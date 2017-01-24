@@ -25,6 +25,3 @@
     name: php-fpm
     state: started
     enabled: True
-- name: nginx restart
-  service:
-    name=nginx state=restarted
