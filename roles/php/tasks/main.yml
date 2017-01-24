@@ -16,9 +16,9 @@
     owner=root
     group=root
     mode=0755
-- name: deploy adminer
-  copy:
-    src: adminer-4.2.5.php
+- name: wget adminer
+  get_url:
+    url: "https://github.com/vrana/adminer/releases/download/v4.2.5/adminer-4.2.5.php"
     dest: /usr/share/webapps/adminer/adminer.php
 - name: systemctl enable php-fpm
   systemd:
