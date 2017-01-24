@@ -128,7 +128,7 @@ server {
     # サーバ証明書（サーバ証明書に中間CA証明書を連結したもの）
     ssl_certificate      /etc/letsencrypt/live/{{ domain }}/fullchain.pem;
     # 秘密鍵
-    ssl_certificate_key  /etc/letsencrypt/live/{{ domain }}/privkey.pem;  
+    ssl_certificate_key  /etc/letsencrypt/live/{{ domain }}/privkey.pem;
 
     server_name {{ domain }};
     location / {
