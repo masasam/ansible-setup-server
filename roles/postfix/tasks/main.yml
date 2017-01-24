@@ -17,7 +17,7 @@
 - name: deploy master.cf
   copy:
     src: master.cf
-    dest: /etc/postfix/master.cf    
+    dest: /etc/postfix/master.cf
 - name: create group vmail
   group: name=vmail gid=5000
 - name: create users vmail
