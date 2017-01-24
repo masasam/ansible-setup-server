@@ -169,7 +169,6 @@ server {
     rewrite ^(.*) https://{{ domain }}$1 permanent;
 }
 
-
+include /etc/nginx/conf.d/*.conf;
 }
 
-include /etc/nginx/conf.d/*.conf;
