@@ -1,6 +1,13 @@
 - name: install nginx
   pacman: name=nginx state=present
   when: ansible_os_family == 'Archlinux'
+- name: nginx conf.d directory
+  file:
+    path=/etc/nginx/conf.d
+    state=directory
+    owner=root
+    group=root
+    mode=0755
 - name: render nginx.conf
   template:
     src=templates/nginx.conf.j2
