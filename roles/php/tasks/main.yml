@@ -1,0 +1,30 @@
+- name: install php
+  pacman: name=php-fpm state=present
+  when: ansible_os_family == 'Archlinux'
+- name: deploy php.ini
+  copy:
+    src: php.ini
+    dest: /etc/php/php.ini
+- name: render adminer.conf
+  template:
+    src=templates/adminer.conf.j2
+    dest=/etc/nginx/conf.d/adminer.conf
+- name: adminer directory
+  file:
+    path=/usr/share/webapps/adminer
+    state=directory
+    owner=root
+    group=root
+    mode=0755
+- name: deploy adminer
+  copy:
+    src: adminer-4.2.5.php
+    dest: /usr/share/webapps/adminer/adminer.php
+- name: systemctl enable php-fpm
+  systemd:
+    name: php-fpm
+    state: started
+    enabled: True
+- name: nginx restart
+  service:
+    name=nginx state=restarted
