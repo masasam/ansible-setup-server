@@ -38,6 +38,7 @@ alias ls='ls --color=auto'
 alias ll='ls -al'
 alias du="du -h"
 alias df="df -h"
+alias mysql="mysql --pager='less -S -n -i -F -X'"
 autoload -U compinit
 compinit
 setopt no_beep
