@@ -1,0 +1,5 @@
+check process php-fpm with pidfile /run/php-fpm/php-fpm.pid
+    start program = "/bin/systemctl start php-fpm"
+    stop program  = "/bin/systemctl stop php-fpm"
+    if failed unixsocket /var/run/php-fpm/php-fpm.sock then restart
+    if 3 restarts within 5 cycles then timeout
