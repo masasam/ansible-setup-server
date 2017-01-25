@@ -23,6 +23,10 @@
   copy:
     src: sshd
     dest: /etc/monit.d/sshd
+- name: deploy monit/php-fpm
+  copy:
+    src: php-fpm
+    dest: /etc/monit.d/php-fpm
 - name: deploy monit/postfix
   copy:
     src: postfix
