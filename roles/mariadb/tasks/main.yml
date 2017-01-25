@@ -6,9 +6,9 @@
 - name: install mysql-python
   pacman: name=mysql-python state=present
   when: ansible_os_family == 'Archlinux'
-- name: deploy my.conf
+- name: deploy my.cnf
   copy:
-    src: my.conf
+    src: my.cnf
     dest: /etc/mysql/my.cnf
 - name: mariadb init
   become: yes
