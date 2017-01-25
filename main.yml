@@ -7,13 +7,13 @@
     - nginx
     - mariadb
     - postfix
+    - dovecot
+    - php
     - vim
     - zsh
-    - dovecot
     - iptables
     - monit
     - mackerel
-    - php
   tasks:
     - name: install all
       pacman: name={{ item }} state=installed
