@@ -1,11 +1,6 @@
 - name: install dovecot
   pacman: name=dovecot state=present
   when: ansible_os_family == 'Archlinux'
-- name: systemctl enable dovecot
-  systemd:
-    name: dovecot
-    state: started
-    enabled: True
 - name: render dovecot-passwd
   template:
     src=templates/passwd.j2
@@ -110,3 +105,13 @@
   copy:
     src: auth-vpopmail.conf.ext
     dest: /etc/dovecot/conf.d/auth-vpopmail.conf.ext
+- name: systemctl enable postfix
+  systemd:
+    name: postfix
+    state: started
+    enabled: True
+- name: systemctl enable dovecot
+  systemd:
+    name: dovecot
+    state: started
+    enabled: True

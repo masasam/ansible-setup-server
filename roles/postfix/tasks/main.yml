@@ -46,8 +46,3 @@
   command: newaliases
   args:
     creates: /etc/aliases.db
-- name: systemctl enable postfix
-  systemd:
-    name: postfix
-    state: started
-    enabled: True
