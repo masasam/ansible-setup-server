@@ -70,16 +70,20 @@ private.yml はあらかじめ以下のコマンドで暗号化しておく
 
 private.yml の中身  
 
-	hostname: 'yourhost'
-	domain: 'yourdomain'
-	subdomain: 'subdomain.yourdomain'
-	mailroot: 'youremailaddress'
-	monitalert: 'youremailaddress'
-	infopassword: '913331d8782236a8ecba7764a63aa27b26437fd40ca878d887f11d81245c2c6b'
-	mariadbrootpassword: 'mariadbrootpassword'
-	mackerelapikey: 'yourmackerelapikey'
-	dbname: 'yourdbbame'
-	dbpassword: 'yourdbpassword'
+	hostname: 'yourhost' ← linux ホスト名
+	domain: 'yourdomain' ← メインドメイン
+	subdomain: 'subdomain.yourdomain' ← サブドメイン(blog に使う)
+	username: 'ansible' ← ansible が ssh する user 名
+	mailroot: 'youremailaddress' ← root のメールを転送するメールアドレス
+	monitalert: 'youremailaddress' ← monit からのアラートメールの宛先
+	infopassword: '913336a8ecba7764cd81245c2c6b'
+	mariadbrootpassword: 'mariadbrootpassword' ← mariadb の root ユーザーのパスワード
+	mackerelapikey: 'yourmackerelapikey' ← mackerel の apikey
+	dbname: 'yourdbbame' ← mariadb で利用する DB 名
+	dbpassword: 'yourdbpassword' ← そのパスワード
+    docroot: '/home/html' ← メインドキュメントルート
+    docrootblog: '/home/blog' ← blog のドキュメントルート
+    docrootadminer: '/usr/share/webapps/adminer' ← adminer のドキュメントルート
 
 infopassword は info@yourdomain のメールアドレスのパスワードになる  
 infopassword の作り方  
@@ -90,11 +94,11 @@ infopassword の作り方
 
 と打つと
 
-	{CRAM-MD5}913331d8782236a8ecba7764a63aa27b26437fd40ca878d887f11d81245c2c6b
+	{CRAM-MD5}913336a8ecba7764cd81245c2c6b
 
 がでるので
 
-	infopassword: '913331d8782236a8ecba7764a63aa27b26437fd40ca878d887f11d81245c2c6b'
+	infopassword: '913336a8ecba7764cd81245c2c6b'
 
 とする
 
