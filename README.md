@@ -2,7 +2,7 @@
 
 root で ansible で利用する user を作成  
 user 名は ansible にする  
-	
+
     useradd -m -G wheel -s /bin/zsh ansible
 	su - ansible
 	ssh-keygen -t rsa -b 4096
@@ -12,7 +12,7 @@ user 名は ansible にする
 	vi authorized_keys ← id_rsa.pub キーを登録
 
 root に戻って  
-	
+
 	systemctl enable sshd
 	systemctl start sshd
 
@@ -87,7 +87,7 @@ infopassword の作り方
     doveadm pw
 	Enter new password: yourpassword
 	Retype new password: yourpassword
-	
+
 と打つと
 
 	{CRAM-MD5}913331d8782236a8ecba7764a63aa27b26437fd40ca878d887f11d81245c2c6b
@@ -100,7 +100,7 @@ infopassword の作り方
 
 #### サーバーのアップデートだけする playbook
 
-    ansible-playbook update.yml 
+    ansible-playbook update.yml
 
 ## テスト用ゲストコンテナをローカルに作る
 
@@ -120,7 +120,7 @@ infopassword の作り方
 ゲストも Arch Linux なので  
 
 	pacman -Sy bash-completion openssh
-	
+
 arch linux は python3 がデフォルトなので  
 (centos8 も python3 になるようなので気をつける)  
 
@@ -137,7 +137,7 @@ ansible で利用する user を作成
 	vi authorized_keys ← id_rsa.pub キーを登録
 
 root に戻って  
-	
+
 	systemctl enable sshd
 	systemctl start sshd
 
@@ -184,7 +184,7 @@ visudo
 ssh でつながるようになったから次回以降はバックグラウンドで起動してよい。  
 (ssh でログインしてシャットダウンできるようになったため)  
 
-    sudo systemd-nspawn -b -D ~/systemdcontainer --bind=/var/cache/pacman/pkg & 
+    sudo systemd-nspawn -b -D ~/systemdcontainer --bind=/var/cache/pacman/pkg &
 
 .ssh/config に以下を設定して
 
