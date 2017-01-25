@@ -25,9 +25,9 @@
   stat: path=/etc/letsencrypt/live/{{ domain }}/cert.pem
   register: cert_file
 - name: nginx stop
-  service:
-    name: nginx
-    state: stopped
+  become: yes
+  command: systemctl stop nginx.service
+  when: not cert_file.stat.exists
 - name: create certificate {{ domain }}
   become: yes
   command: certbot certonly --standalone -d {{ domain }} --agree-tos --renew-by-default -m info@{{ domain }}
