@@ -1,4 +1,4 @@
 check process sshd with pidfile /var/run/sshd.pid
-   start program  "/bin/systemctl start sshd"
-   stop program  "/bin/systemctl stop sshd"
-   if failed port 22 protocol ssh then restart
+    start program  "/bin/systemctl start sshd"
+    stop program  "/bin/systemctl stop sshd"
+    if failed port 22 protocol ssh then restart

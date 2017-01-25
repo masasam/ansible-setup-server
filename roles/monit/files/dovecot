@@ -1,6 +1,6 @@
 check process dovecot with pidfile /var/run/dovecot/master.pid
-   start program = "/bin/systemctl start dovecot"
-   stop program = "/bin/systemctl stop dovecot"
-   if failed host localhost port 995 type tcpssl sslauto protocol pop then restart
-   if failed host localhost port 110 protocol pop then restart
-   if 5 restarts within 5 cycles then timeout
+    start program = "/bin/systemctl start dovecot"
+    stop program = "/bin/systemctl stop dovecot"
+    if failed host localhost port 995 type tcpssl sslauto protocol pop then restart
+    if failed host localhost port 110 protocol pop then restart
+    if 5 restarts within 5 cycles then timeout
