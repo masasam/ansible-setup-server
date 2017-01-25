@@ -8,12 +8,59 @@
     owner=root
     group=root
     mode=0755
+- name: html directory
+  file: path={{ docroot }} state=directory owner={{ username }} group={{ username }} mode=0755
+- name: blog directory
+  file: path={{ docrootblog }} state=directory owner={{ username }} group={{ username }} mode=0755
+- name: adminer directory
+  file: path={{ docrootadminer }} state=directory owner=root group=root mode=0755
 - name: render nginx.conf
   template:
     src=templates/nginx.conf.j2
     dest=/etc/nginx/nginx.conf
+- name: install certbot
+  pacman: name=certbot state=present
+  when: ansible_os_family == 'Archlinux'
+- name: check cert
+  stat: path=/etc/letsencrypt/live/{{ domain }}/cert.pem
+  register: cert_file
+- name: nginx stop
+  service:
+    name: nginx
+    state: stopped
+- name: create certificate {{ domain }}
+  become: yes
+  command: certbot certonly --standalone -d {{ domain }} --agree-tos --renew-by-default -m info@{{ domain }}
+  when: not cert_file.stat.exists
+- name: create certificate {{ subdomain }}
+  become: yes
+  command: certbot certonly --standalone -d {{ subdomain }} --agree-tos --renew-by-default -m info@{{ domain }}
+  when: not cert_file.stat.exists
+- name: create certificate adminer.{{ domain }}
+  become: yes
+  command: certbot certonly --standalone -d adminer.{{ domain }} --agree-tos --renew-by-default -m info@{{ domain }}
+  when: not cert_file.stat.exists
+- name: render adminer.conf
+  template:
+    src=templates/adminer.conf.j2
+    dest=/etc/nginx/conf.d/adminer.conf
+- name: wget adminer
+  get_url:
+    url: "https://github.com/vrana/adminer/releases/download/v4.2.5/adminer-4.2.5.php"
+    dest: /usr/share/webapps/adminer/adminer.php
 - name: nginx start
   systemd:
     name: nginx
+    state: started
+    enabled: True
+- name: deploy certbot.service
+  become: yes
+  copy: src=certbot.service dest=/etc/systemd/system/certbot.service owner=root group=root mode=644 backup=yes
+- name: deploy certbot.timer
+  become: yes
+  copy: src=certbot.timer dest=/etc/systemd/system/certbot.timer owner=root group=root mode=644 backup=yes
+- name: systemctl enable certbot.timer
+  systemd:
+    name: certbot.timer
     state: started
     enabled: True
