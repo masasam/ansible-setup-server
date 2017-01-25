@@ -1,11 +1,6 @@
 - name: install postfix
   pacman: name=postfix state=present
   when: ansible_os_family == 'Archlinux'
-- name: systemctl enable postfix
-  systemd:
-    name: postfix
-    state: started
-    enabled: True
 - name: render main.cf
   template:
     src=templates/main.cf.j2
@@ -51,3 +46,8 @@
   command: newaliases
   args:
     creates: /etc/aliases.db
+- name: systemctl enable postfix
+  systemd:
+    name: postfix
+    state: started
+    enabled: True
