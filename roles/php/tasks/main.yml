@@ -5,21 +5,6 @@
   copy:
     src: php.ini
     dest: /etc/php/php.ini
-- name: render adminer.conf
-  template:
-    src=templates/adminer.conf.j2
-    dest=/etc/nginx/conf.d/adminer.conf
-- name: adminer directory
-  file:
-    path=/usr/share/webapps/adminer
-    state=directory
-    owner=root
-    group=root
-    mode=0755
-- name: wget adminer
-  get_url:
-    url: "https://github.com/vrana/adminer/releases/download/v4.2.5/adminer-4.2.5.php"
-    dest: /usr/share/webapps/adminer/adminer.php
 - name: systemctl enable php-fpm
   systemd:
     name: php-fpm
