@@ -128,7 +128,7 @@ infopassword の作り方
 
 #### サーバーのアップデートだけする playbook
 
-    ansible-playbook update.yml
+    ansible-playbook update.yml --extra-vars "@private.yml"
 
 ## テスト用ゲストコンテナをローカルに作る
 
