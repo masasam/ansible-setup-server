@@ -1,0 +1,39 @@
+- hosts: first
+  tasks:
+    - name: create users {{ username }}
+      user: name={{ username }} state=present groups=wheel shell=/bin/zsh home={{ username }} createhome=yes
+    - name: ssh-keygen
+      user: "{{ username }}"
+      command: ssh-keygen -t rsa -b 4096
+      args:
+        chdir: /home/{{ username }}
+        creates: /home/{{ username }}/.ssh/authorized_keys
+    - name: mv authorized_keys
+      user: "{{ username }}"
+      command: mv id_rsa.pub authorized_keys
+      args:
+        chdir: /home/{{ username }}/.ssh
+        creates: /home/{{ username }}/.ssh/authorized_keys
+    - name: chmod authorized_keys
+      user: "{{ username }}"
+      file: path=/home/{{ username }}/.ssh/authorized_keys mode=0600
+    - name: add my publickey
+      user: "{{ username }}"
+      lineinfile:
+        dest: /home/{{ username }}/.ssh/authorized_keys
+        line: {{ mysshpublickey }}
+    - name: systemctl enable sshd
+      systemd:
+        name: sshd
+        state: started
+        enabled: True
+    - name: permit su only wheel group user
+      lineinfile: dest=/etc/pam.d/su line='auth required pam_wheel.so use_uid' backup=true
+    - name: disable Defaults requiretty
+      lineinfile: dest=/etc/sudoers regexp='^(Defaults\s+requiretty)$' line='#\1' backrefs=true  validate='visudo -cf %s' backup=true
+    - name: permit {{ username }} to do sudo
+      lineinfile: dest=/etc/sudoers line='ansible ALL=(ALL) ALL' validate='visudo -cf %s' backup=true
+    - name: permit wheel to do sudo
+      lineinfile: dest=/etc/sudoers line='%wheel ALL=(ALL) ALL' validate='visudo -cf %s' backup=true
+    - name: permit wheel to do sudo nopassword
+      lineinfile: dest=/etc/sudoers line='%wheel ALL=(ALL) NOPASSWD: ALL' validate='visudo -cf %s' backup=true

@@ -27,7 +27,7 @@ vi /etc/hosts
 
     127.0.0.1   localhost.localdomain   localhost archlinux
 
-#### root になれるユーザを wheel グループに属するユーザのみにする
+root になれるユーザを wheel グループに属するユーザのみにする  
 
     usermod -G wheel ansible
 
@@ -36,7 +36,7 @@ vi /etc/pam.d/su
     # コメントアウトを外す
     auth required pam_wheel.so use_uid
 
-#### sudo が使えるユーザ（グループ）を設定する
+sudo が使えるユーザ（グループ）を設定する  
 
 visudo  
 
