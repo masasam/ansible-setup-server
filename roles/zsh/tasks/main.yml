@@ -1,16 +1,12 @@
-- name: install zsh
-  pacman: name=zsh state=present
+- name: include Archlinux.yml
+  include: Archlinux.yml
   when: ansible_os_family == 'Archlinux'
-- name: deploy zshrc at ansible
-  become: yes
-  become_user: ansible
-  copy:
-    src: zshrc
-    dest: ~/.zshrc
-- name: deploy zshrc at root
-  become: yes
-  copy:
-    src: zshrc
-    dest: ~/.zshrc
-- name: root default shell is /bin/zsh
-  user: name=root shell=/bin/zsh
+  static: no
+- name: include RedHat.yml
+  include: RedHat.yml
+  when: ansible_os_family == 'RedHat'
+  static: no
+- name: include Debian.yml
+  include: Debian.yml
+  when: ansible_os_family == 'Debian'
+  static: no

@@ -1,16 +1,12 @@
-- name: install php
-  pacman: name=php-fpm state=present
+- name: include Archlinux.yml
+  include: Archlinux.yml
   when: ansible_os_family == 'Archlinux'
-- name: deploy php.ini
-  copy:
-    src: php.ini
-    dest: /etc/php/php.ini
-- name: deploy php-fpm.conf
-  copy:
-    src: php-fpm.conf
-    dest: /etc/php/php-fpm.conf
-- name: systemctl enable php-fpm
-  systemd:
-    name: php-fpm
-    state: started
-    enabled: True
+  static: no
+- name: include RedHat.yml
+  include: RedHat.yml
+  when: ansible_os_family == 'RedHat'
+  static: no
+- name: include Debian.yml
+  include: Debian.yml
+  when: ansible_os_family == 'Debian'
+  static: no
