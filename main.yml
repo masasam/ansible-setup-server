@@ -1,5 +1,5 @@
 - hosts: all
-  user: ansible
+  user: "{{ username }}"
   become: yes
   roles:
     - git
