@@ -3,7 +3,7 @@
     sudo pacman -S ansible
 	ghq get -p masasam/ansible-vps
 
-## ansible でプロビジョンしたいサーバーを準備
+## ansible でプロビジョニングしたいサーバーを準備
 
 centos 対応はすぐできるので対象サーバーを archlinux とした  
 (自分サーバーが archlinux で構築してるからというくだらない理由)  
