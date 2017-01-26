@@ -1,12 +1,9 @@
-- name: install others
-  pacman: name={{ item }} state=installed
+- include: Archlinux.yml
   when: ansible_os_family == 'Archlinux'
-  with_items:
-    - bash-completion
-    - zsh-completions
-    - tig
-    - wget
-    - htop
-    - rsync
-    - tmux
-    - nmap
+  static: no
+- include: RedHat.yml
+  when: ansible_os_family == 'RedHat'
+  static: no
+- include: Debian.yml
+  when: ansible_os_family == 'Debian'
+  static: no
