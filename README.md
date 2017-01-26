@@ -4,8 +4,8 @@ centos 対応はすぐできるので対象サーバーを archlinux とした
 (自分サーバーが archlinux で構築してるからというくだらない理由)  
 
 このパラグラフの作業をする(自分のマシンに ansible をインストールまで)  
-first.yml というプレイブックもある  
-root に ssh でログインできるなら  
+first.yml というプレイブックもあるを使うなら  
+root に ssh でログインできるハズなので  
 private.yml に
 
 	username: 'ansible'
