@@ -1,8 +1,9 @@
-- name: deploy /etc/iptables/iptables.rules
-  become: yes
-  copy: src=iptables.rules dest=/etc/iptables/iptables.rules owner=root group=root mode=644 backup=yes
-- name: systemctl enable iptables
-  systemd:
-    name: iptables
-    state: started
-    enabled: True
+- include: Archlinux.yml
+  when: ansible_os_family == 'Archlinux'
+  static: no
+- include: RedHat.yml
+  when: ansible_os_family == 'RedHat'
+  static: no
+- include: Debian.yml
+  when: ansible_os_family == 'Debian'
+  static: no

@@ -1,3 +1,9 @@
-- name: install git
-  pacman: name=git state=present
+- include: Archlinux.yml
   when: ansible_os_family == 'Archlinux'
+  static: no
+- include: RedHat.yml
+  when: ansible_os_family == 'RedHat'
+  static: no
+- include: Debian.yml
+  when: ansible_os_family == 'Debian'
+  static: no
