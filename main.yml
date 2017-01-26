@@ -14,16 +14,5 @@
     - iptables
     - monit
     - mackerel
-  tasks:
-    - name: install all
-      pacman: name={{ item }} state=installed
-      when: ansible_os_family == 'Archlinux'
-      with_items:
-        - bash-completion
-        - zsh-completions
-        - tig
-        - wget
-        - htop
-        - rsync
-        - tmux
-        - nmap
+    - others
+    
