@@ -1,12 +1,17 @@
+## 自分のマシンに ansible をインストール
+
+    pacman -S ansible
+	cd git
+	git clone git@github.com:masasam/ansible-vps.git
+
 ## ansible でプロビジョンしたいサーバーを準備
 
 centos 対応はすぐできるので対象サーバーを archlinux とした  
 (自分サーバーが archlinux で構築してるからというくだらない理由)  
 
-このパラグラフの作業をする(自分のマシンに ansible をインストールまで)  
+このパラグラフの作業をする(プロビジョニングを実行の直前まで)  
 first.yml というプレイブックを使うなら  
-root に ssh でログインできるハズなので  
-private.yml に
+root に ssh でログインできるハズなので private.yml に  
 
 	username: 'ansible'
 	mysshpublickey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCeE...以下省略'
@@ -72,12 +77,6 @@ visudo
     #(正確には wheel グループに与えるのでむやみに wheel グループに user をいれないように)
     ## Same thing without a password
     %wheel ALL=(ALL) NOPASSWD: ALL
-
-## 自分のマシンに ansible をインストール
-
-    pacman -S ansible
-	cd git
-	git clone git@github.com:masasam/ansible-vps.git
 
 ## プロビジョニングを実行
 
