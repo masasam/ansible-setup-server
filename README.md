@@ -68,6 +68,11 @@ private.yml はあらかじめ以下のコマンドで暗号化しておく
 
 	ansible-vault encrypt private.yml
 
+ansible.cfg に暗号のパスワードの場所を書いておくと毎回パスワードを打たなくていい  
+(中身はパスワードだけ)  
+
+	vault_password_file = ~/Dropbox/ansible/vault_pass
+
 private.yml の中身  
 
 	hostname: 'yourhost' ← linux ホスト名
