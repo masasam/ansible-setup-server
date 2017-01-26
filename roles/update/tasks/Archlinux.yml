@@ -1,0 +1,6 @@
+- name: update all
+  pacman: update_cache=yes upgrade=yes
+  when: ansible_os_family == 'Archlinux'
+- name: old cache delete
+  command: /sbin/paccache -r
+  when: ansible_os_family == 'Archlinux'
