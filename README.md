@@ -12,6 +12,7 @@ centos 対応はすぐできるので対象サーバーを archlinux とした
 first.yml というプレイブックを使うなら  
 root に ssh でログインできるハズなので private.yml に  
 
+	hostname: 'archlinux'
 	username: 'ansible'
 	mysshpublickey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCeE...以下省略'
 
