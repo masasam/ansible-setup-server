@@ -10,3 +10,4 @@
     - rsync
     - tmux
     - nmap
+    - openbsd-netcat
