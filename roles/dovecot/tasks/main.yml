@@ -1,9 +1,12 @@
-- include: Archlinux.yml
+- name: include Archlinux.yml
+  include: Archlinux.yml
   when: ansible_os_family == 'Archlinux'
   static: no
-- include: RedHat.yml
+- name: include RedHat.yml
+  include: RedHat.yml
   when: ansible_os_family == 'RedHat'
   static: no
-- include: Debian.yml
+- name: include Debian.yml
+  include: Debian.yml
   when: ansible_os_family == 'Debian'
   static: no
