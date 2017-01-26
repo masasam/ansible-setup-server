@@ -1,0 +1,18 @@
+- name: install mackerel
+  become: yes
+  copy: src=mackerel-agent dest=/usr/bin/mackerel-agent owner=root group=root mode=755
+- name: render mackerel-agent.conf
+  template:
+    src=templates/mackerel-agent.conf.j2
+    dest=/etc/mackerel-agent/mackerel-agent.conf
+- name: deploy mackerel.service
+  become: yes
+  copy: src=mackerel.service dest=/usr/lib/systemd/system/mackerel.service owner=root group=root mode=644 backup=yes
+- name: systemctl enable mackerel
+  systemd:
+    name: mackerel
+    state: started
+    enabled: True
+- name: mackerel start
+  service:
+    name=mackerel state=started

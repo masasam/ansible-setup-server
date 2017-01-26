@@ -1,50 +1,9 @@
-- name: install monit
-  pacman: name=monit state=present
+- include: Archlinux.yml
   when: ansible_os_family == 'Archlinux'
-- name: render monit.conf
-  template:
-    src=templates/monitrc.j2
-    dest=/etc/monitrc
-- name: mkdir monit.d
-  file: path=/etc/monit.d
-        state=directory
-        owner=root
-        group=root
-        mode=0700
-- name: deploy monit/filesystem
-  copy:
-    src: filesystem
-    dest: /etc/monit.d/filesystem
-- name: deploy monit/loadavgmemoryswap
-  copy:
-    src: loadavgmemoryswap
-    dest: /etc/monit.d/loadavgmemoryswap
-- name: deploy monit/sshd
-  copy:
-    src: sshd
-    dest: /etc/monit.d/sshd
-- name: deploy monit/php-fpm
-  copy:
-    src: php-fpm
-    dest: /etc/monit.d/php-fpm
-- name: deploy monit/postfix
-  copy:
-    src: postfix
-    dest: /etc/monit.d/postfix
-- name: deploy monit/dovecot
-  copy:
-    src: dovecot
-    dest: /etc/monit.d/dovecot
-- name: deploy monit/nginx
-  copy:
-    src: nginx
-    dest: /etc/monit.d/nginx
-- name: render monit/mariadb
-  template:
-    src=templates/mariadb.j2
-    dest=/etc/monit.d/mariadb
-- name: systemctl enable monit
-  systemd:
-    name: monit
-    state: started
-    enabled: True
+  static: no
+- include: RedHat.yml
+  when: ansible_os_family == 'RedHat'
+  static: no
+- include: Debian.yml
+  when: ansible_os_family == 'Debian'
+  static: no
