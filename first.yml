@@ -2,6 +2,9 @@
   tasks:
     - name: create users {{ username }}
       user: name={{ username }} state=present groups=wheel shell=/bin/zsh home={{ username }} createhome=yes
+    - name: set hostname {{ hostname }}
+      hostname:
+        name: "{{ hostname }}"
     - name: ssh-keygen
       user: "{{ username }}"
       command: ssh-keygen -t rsa -b 4096
