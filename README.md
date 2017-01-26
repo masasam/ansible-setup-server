@@ -1,8 +1,7 @@
 ## 自分のマシンに ansible をインストール
 
-    pacman -S ansible
-	cd git
-	git clone git@github.com:masasam/ansible-vps.git
+    sudo pacman -S ansible
+	ghq get -p masasam/ansible-vps
 
 ## ansible でプロビジョンしたいサーバーを準備
 
