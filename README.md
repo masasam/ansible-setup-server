@@ -3,6 +3,23 @@
 centos 対応はすぐできるので対象サーバーを archlinux とした  
 (自分サーバーが archlinux で構築してるからというくだらない理由)  
 
+このパラグラフの作業をする(自分のマシンに ansible をインストールまで)  
+first.yml というプレイブックもある  
+root に ssh でログインできるなら  
+private.yml に
+
+	username: 'ansible'
+	mysshpublickey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCeE...以下省略'
+
+を書いて
+
+	 ansible-playbook first.yml --extra-vars "@private.yml" -k -c paramiko
+
+で以下のパラグラフの作業はおわる。  
+(普段はパスワードを使わず公開鍵認証なので初回だけパスワードを使う)  
+
+---
+手で作業する場合  
 root で ansible で利用する user を作成  
 user 名は ansible にする  
 
