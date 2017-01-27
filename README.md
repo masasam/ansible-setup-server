@@ -63,19 +63,19 @@ visudo
 
 ## プロビジョニングを実行
 
-	ansible-playbook main.yml --extra-vars "@private.yml"
+	ansible-playbook main.yml
 
-private.yml に変数とパスワードを書いておく  
-private.yml はあらかじめ以下のコマンドで暗号化しておく  
+group_vars/vps.yml に変数とパスワードを書いておく  
+vps.yml はあらかじめ以下のコマンドで暗号化しておく  
 
-	ansible-vault encrypt private.yml
+	ansible-vault encrypt vps.yml
 
 ansible.cfg に暗号のパスワードの場所を書いておくと毎回パスワードを打たなくていい  
 (中身はパスワードだけ)  
 
 	vault_password_file = ~/Dropbox/ansible/vault_pass
 
-private.yml の中身  
+vps.yml の中身  
 
 	hostname: 'yourhost' ← linux ホスト名
 	domain: 'yourdomain' ← メインドメイン
@@ -111,7 +111,7 @@ infopassword の作り方
 
 #### サーバーのアップデートだけする playbook
 
-    ansible-playbook update.yml --extra-vars "@private.yml"
+    ansible-playbook update.yml
 
 ## テスト用ゲストコンテナをローカルに作る
 
