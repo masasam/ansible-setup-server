@@ -1,6 +1,8 @@
 - hosts: all
   user: "{{ username }}"
   become: yes
+  vars:
+    - include: vars/private.yml
   roles:
     - git
     - go
