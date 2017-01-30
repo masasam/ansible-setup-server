@@ -10,4 +10,4 @@
 - name: render rtorrent.rc
   template:
     src=templates/rtorrent.rc.j2
-    dest=~/.rtorrent.rc
+    dest=/home/{{ username }}/.rtorrent.rc

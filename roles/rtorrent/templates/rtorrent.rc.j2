@@ -18,12 +18,12 @@ download_rate = 200
 upload_rate = 28
 
 # Default directory to save the downloaded torrents.
-directory = ~/download
+directory = /home/{{ username }}/download
 
 # Default session directory. Make sure you don't run multiple instance
 # of rtorrent using the same session directory. Perhaps using a
 # relative path?
-session = ~/.session
+session = /home/{{ username }}/.session
 
 # Watch a directory for new torrents, and stop those that have been
 # deleted.
