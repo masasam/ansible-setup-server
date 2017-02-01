@@ -1,0 +1,120 @@
+- name: install dovecot
+  apt: name=dovecot-core state=present
+  when: ansible_os_family == 'Debian'
+- name: install dovecot
+  apt: name=dovecot-pop3d state=present
+  when: ansible_os_family == 'Debian'
+- name: render dovecot-passwd
+  template:
+    src=templates/passwd.j2
+    dest=/etc/dovecot/passwd
+- name: render dovecot-ssl.conf
+  template:
+    src=templates/10-ssl.conf.j2
+    dest=/etc/dovecot/conf.d/10-ssl.conf
+- name: deploy dovecot.conf
+  copy:
+    src: dovecot.conf
+    dest: /etc/dovecot/dovecot.conf
+- name: deploy dovecot/10-auth.conf
+  copy:
+    src: 10-auth.conf
+    dest: /etc/dovecot/conf.d/10-auth.conf
+- name: deploy dovecot/10-director.conf
+  copy:
+    src: 10-director.conf
+    dest: /etc/dovecot/conf.d/10-director.conf
+- name: deploy dovecot/10-logging.conf
+  copy:
+    src: 10-logging.conf
+    dest: /etc/dovecot/conf.d/10-logging.conf
+- name: deploy dovecot/10-mail.conf
+  copy:
+    src: 10-mail.conf
+    dest: /etc/dovecot/conf.d/10-mail.conf
+- name: deploy dovecot/10-master.conf
+  copy:
+    src: 10-master.conf
+    dest: /etc/dovecot/conf.d/10-master.conf
+- name: deploy dovecot/15-lda.conf
+  copy:
+    src: 15-lda.conf
+    dest: /etc/dovecot/conf.d/15-lda.conf
+- name: deploy dovecot/15-mailboxes.conf
+  copy:
+    src: 15-mailboxes.conf
+    dest: /etc/dovecot/conf.d/15-mailboxes.conf
+- name: deploy dovecot/20-imap.conf
+  copy:
+    src: 20-imap.conf
+    dest: /etc/dovecot/conf.d/20-imap.conf
+- name: deploy dovecot/20-lmtp.conf
+  copy:
+    src: 20-lmtp.conf
+    dest: /etc/dovecot/conf.d/20-lmtp.conf
+- name: deploy dovecot/20-pop3.conf
+  copy:
+    src: 20-pop3.conf
+    dest: /etc/dovecot/conf.d/20-pop3.conf
+- name: deploy dovecot/90-acl.conf
+  copy:
+    src: 90-acl.conf
+    dest: /etc/dovecot/conf.d/90-acl.conf
+- name: deploy dovecot/90-plugin.conf
+  copy:
+    src: 90-plugin.conf
+    dest: /etc/dovecot/conf.d/90-plugin.conf
+- name: deploy dovecot/90-quota.conf
+  copy:
+    src: 90-quota.conf
+    dest: /etc/dovecot/conf.d/90-quota.conf
+- name: deploy dovecot/auth-checkpassword.conf.ext
+  copy:
+    src: auth-checkpassword.conf.ext
+    dest: /etc/dovecot/conf.d/auth-checkpassword.conf.ext
+- name: deploy dovecot/auth-deny.conf.ext
+  copy:
+    src: auth-deny.conf.ext
+    dest: /etc/dovecot/conf.d/auth-deny.conf.ext
+- name: deploy dovecot/auth-dict.conf.ext
+  copy:
+    src: auth-dict.conf.ext
+    dest: /etc/dovecot/conf.d/auth-dict.conf.ext
+- name: deploy dovecot/auth-ldap.conf.ext
+  copy:
+    src: auth-ldap.conf.ext
+    dest: /etc/dovecot/conf.d/auth-ldap.conf.ext
+- name: deploy dovecot/auth-master.conf.ext
+  copy:
+    src: auth-master.conf.ext
+    dest: /etc/dovecot/conf.d/auth-master.conf.ext
+- name: deploy dovecot/auth-passwdfile.conf.ext
+  copy:
+    src: auth-passwdfile.conf.ext
+    dest: /etc/dovecot/conf.d/auth-passwdfile.conf.ext
+- name: deploy dovecot/auth-sql.conf.ext
+  copy:
+    src: auth-sql.conf.ext
+    dest: /etc/dovecot/conf.d/auth-sql.conf.ext
+- name: deploy dovecot/auth-static.conf.ext
+  copy:
+    src: auth-static.conf.ext
+    dest: /etc/dovecot/conf.d/auth-static.conf.ext
+- name: deploy dovecot/auth-system.conf.ext
+  copy:
+    src: auth-system.conf.ext
+    dest: /etc/dovecot/conf.d/auth-system.conf.ext
+- name: deploy dovecot/auth-vpopmail.conf.ext
+  copy:
+    src: auth-vpopmail.conf.ext
+    dest: /etc/dovecot/conf.d/auth-vpopmail.conf.ext
+- name: systemctl enable postfix
+  systemd:
+    name: postfix
+    state: started
+    enabled: True
+- name: systemctl enable dovecot
+  systemd:
+    name: dovecot
+    state: started
+    enabled: True
