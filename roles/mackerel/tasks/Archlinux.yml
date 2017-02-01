@@ -1,6 +1,8 @@
 - name: install mackerel
   become: yes
   copy: src=mackerel-agent dest=/usr/bin/mackerel-agent owner=root group=root mode=755
+- name: mackerel directory
+  file: path=/etc/mackerel-agent state=directory owner=root group=root mode=755
 - name: render mackerel-agent.conf
   template:
     src=templates/mackerel-agent.conf.j2
