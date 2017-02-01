@@ -213,7 +213,7 @@ ssh でコンテナにログイン
 	yaourt -S debian-archive-keyring
 
 	mkdir debian
-	sudo debootstrap jessie debian http://ftp.jaist.ac.jp/pub/Linux/debian/
+	sudo debootstrap stretch debian http://ftp.jaist.ac.jp/pub/Linux/debian/
 
 	sudo chroot debian
 	passwd root
