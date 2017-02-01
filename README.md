@@ -34,32 +34,22 @@ vi /etc/hosts
 
     127.0.0.1   localhost.localdomain   localhost archlinux
 
-root になれるユーザを wheel グループに属するユーザのみにする  
-
-    usermod -G wheel ansible
-
 vi /etc/pam.d/su  
 
     # コメントアウトを外す
     auth required pam_wheel.so use_uid
 
-sudo が使えるユーザ（グループ）を設定する  
-
 visudo  
 
     #Defaults    requiretty(コメントアウトしてあるか確認)
 
-    #ansible に sudo 権限を与えておく
     ## User privilege specification
     root ALL=(ALL) ALL
     ansible ALL=(ALL) ALL
 
-    ##wheel グループに sudo 権限を与える
     # Uncomment to allow members of group wheel to execute any command
     %wheel ALL=(ALL) ALL
 
-    ##ansible だけはパスワード無で sudo できるようにする
-    #(正確には wheel グループに与えるのでむやみに wheel グループに user をいれないように)
     ## Same thing without a password
     %wheel ALL=(ALL) NOPASSWD: ALL
 
@@ -138,7 +128,7 @@ arch linux は python3 がデフォルトなので
 ansible が python2 を使えるようにする  
 (centos8 も python3 になるようなので気をつける)  
 
-	pacman -Sy python2 zshq
+	pacman -Sy python2 zsh
 
 ansible で利用する user を作成  
 
@@ -178,17 +168,13 @@ visudo
 
     #Defaults    requiretty(centos の場合のみコメントアウトしておく)
 
-    #ansible に sudo 権限を与えておく(su できなくなったときの保険のため)
     ## User privilege specification
     root ALL=(ALL) ALL
     ansible ALL=(ALL) ALL
 
-    ##wheel グループに sudo 権限を与える
     # Uncomment to allow members of group wheel to execute any command
     %wheel ALL=(ALL) ALL
 
-    ##ansible だけはパスワード無で sudo できるようにする
-    #(正確には wheel グループに与えるのでむやみに wheel グループに user をいれないように)
     ## Same thing without a password
     %wheel ALL=(ALL) NOPASSWD: ALL
 
@@ -256,12 +242,10 @@ visudo
 
     #Defaults    requiretty(コメントアウトしてあるか確認)
 
-    #ansible に sudo 権限を与えておく
     ## User privilege specification
     root ALL=(ALL) ALL
     ansible ALL=(ALL) ALL
 
-    ##wheel グループに sudo 権限を与える
     # Uncomment to allow members of group wheel to execute any command
     %sudo ALL=(ALL) ALL
 
@@ -285,3 +269,49 @@ visudo
 	passwd root
 
 	sudo systemd-nspawn -b -D ~/centos
+
+root で ansible で利用する user を作成  
+user 名は ansible にする  
+
+	yum install python openssh-server zsh bash-completion sudo
+    useradd -m -G wheel -s /bin/zsh ansible
+	su - ansible
+	ssh-keygen -t rsa -b 4096
+	cd .ssh/
+	mv id_rsa.pub authorized_keys
+	chmod 600 authorized_keys
+	vi authorized_keys ← id_rsa.pub キーを登録
+
+root に戻って  
+
+	systemctl enable sshd
+	systemctl start sshd
+
+ホスト名を設定(archlinux とする)  
+
+    hostname centos
+
+vi /etc/hosts  
+
+    127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4 centos
+
+vi /etc/pam.d/su  
+
+    # コメントアウトを外す
+    auth required pam_wheel.so use_uid
+
+sudo が使えるユーザ（グループ）を設定する  
+
+visudo  
+
+    #Defaults    requiretty(コメントアウトしてあるか確認)
+
+    ## User privilege specification
+    root ALL=(ALL) ALL
+    ansible ALL=(ALL) ALL
+
+    # Uncomment to allow members of group wheel to execute any command
+    %wheel ALL=(ALL) ALL
+
+    ## Same thing without a password
+    %wheel ALL=(ALL) NOPASSWD: ALL
