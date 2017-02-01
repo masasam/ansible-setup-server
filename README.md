@@ -5,9 +5,10 @@
 
 ## ansible でプロビジョニングしたいサーバーを準備
 
-対象 OS は  
-Archlinux,debian stretch  
-centos は 8 になったらやる  
+対象 OS  
+Archlinux  
+Debian8 stretch  
+Centos7  
 
 root で ansible で利用する user を作成  
 user 名は ansible にする  
@@ -266,3 +267,21 @@ visudo
 
     ## Same thing without a password
     %sudo ALL=(ALL) NOPASSWD: ALL
+
+## centos のテスト用コンテナを作る場合
+
+	yaourt yum
+	mkdir centos
+
+	sudo vim /etc/yum/repos.d/centos.repo
+	[centos]
+	name=centos
+	baseurl=http://ftp.jaist.ac.jp/pub/Linux/CentOS/7/os/x86_64/
+	enabled=1
+
+	sudo yum -y --releasever=7 --installroot=~/centos groupinstall "Base"
+
+	sudo chroot centos
+	passwd root
+
+	sudo systemd-nspawn -b -D ~/centos
