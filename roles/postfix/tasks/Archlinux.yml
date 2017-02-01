@@ -17,15 +17,6 @@
   group: name=vmail gid=5000
 - name: create users vmail
   user: name=vmail uid=5000 state=present groups=vmail shell=/usr/bin/nologin home=/home/vmail createhome=yes
-- name: openssl newkey
-  command: openssl req -new -x509 -nodes -newkey rsa:4096 -keyout vmail.key -out vmail.crt -days 3650
-  args:
-    chdir: /etc/ssl/private/
-    creates: /etc/ssl/private/vmail.key
-- name: chmod vmail.key
-  file: path=/etc/ssl/private/vmail.key owner=root group=root mode=0400
-- name: chmod vmail.crt
-  file: path=/etc/ssl/private/vmail.crt owner=root group=root mode=0444
 - name: postmap vmailbox
   command: postmap /etc/postfix/vmailbox
   args:
