@@ -210,7 +210,7 @@ ssh でコンテナにログイン
 
 	ssh archtest
 
-#### debian のテスト用コンテナを作る
+## debian のテスト用コンテナを作る
 
 	sudo pacman debootstrap
 	yaourt -S debian-archive-keyring
@@ -227,8 +227,7 @@ ssh でコンテナにログイン
 
 	apt-get install python openssh-server zsh bash-completion sudo
 
-	usermod -G sudo ansible
-    useradd -m -s /bin/zsh ansible
+	useradd -m -G sudo -s /bin/zsh ansible
 	su - ansible
 	ssh-keygen -t rsa -b 4096
 	cd .ssh/
