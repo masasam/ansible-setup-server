@@ -13,6 +13,10 @@
   copy:
     src: master.cf
     dest: /etc/postfix/master.cf
+- name: deploy virtual
+  copy:
+    src: virtual
+    dest: /etc/postfix/virtual
 - name: create group vmail
   group: name=vmail gid=5000
 - name: create users vmail
