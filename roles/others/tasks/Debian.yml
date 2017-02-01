@@ -1,0 +1,12 @@
+- name: install others
+  apt: name={{ item }} state=installed
+  when: ansible_os_family == 'Debian'
+  with_items:
+    - bash-completion
+    - tig
+    - wget
+    - htop
+    - rsync
+    - tmux
+    - nmap
+    - netcat-openbsd
