@@ -135,7 +135,7 @@ infopassword の作り方
 arch linux は python3 がデフォルトなので  
 (centos8 も python3 になるようなので気をつける)  
 
-	pacman -Sy python2 zsh
+	pacman -Sy python2 zshq
 
 ansible で利用する user を作成  
 
@@ -219,6 +219,52 @@ ssh でコンテナにログイン
 	passwd root
 
 	sudo systemd-nspawn -b -D ~/debian
+
+ここから debian 仮想サーバー  
+
+	apt-get install python openssh-server zsh bash-completion sudo
+
+	usermod -G sudo ansible
+    useradd -m -s /bin/zsh ansible
+	su - ansible
+	ssh-keygen -t rsa -b 4096
+	cd .ssh/
+	mv id_rsa.pub authorized_keys
+	chmod 600 authorized_keys
+	vi authorized_keys ← id_rsa.pub キーを登録
+
+root に戻って  
+
+	systemctl enable ssh
+	systemctl start ssh
+
+ホスト名を設定(debian とする)  
+
+    hostname debian
+
+vi /etc/hosts
+
+    127.0.0.1       localhost debian
+
+sudo が使えるユーザ（グループ）を設定する  
+
+	update-alternatives --config editor
+
+visudo  
+
+    #Defaults    requiretty(コメントアウトしてあるか確認)
+
+    #ansible に sudo 権限を与えておく
+    ## User privilege specification
+    root ALL=(ALL) ALL
+    ansible ALL=(ALL) ALL
+
+    ##wheel グループに sudo 権限を与える
+    # Uncomment to allow members of group wheel to execute any command
+    %sudo ALL=(ALL) ALL
+
+    ## Same thing without a password
+    %sudo ALL=(ALL) NOPASSWD: ALL
 
 #### ubuntu のテスト用コンテナを作る
 
