@@ -1,0 +1,12 @@
+- name: install others
+  yum: name={{ item }} state=installed
+  when: ansible_os_family == 'Redhat'
+  with_items:
+    - bash-completion
+    - tig
+    - wget
+    - htop
+    - rsync
+    - tmux
+    - nmap
+    - nmap-ncat
