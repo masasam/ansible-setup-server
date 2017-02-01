@@ -129,11 +129,12 @@ infopassword の作り方
 	sudo pacstrap -i -c -d ~/systemdcontainer base base-devel --ignore linux
     sudo systemd-nspawn -b -D ~/systemdcontainer --bind=/var/cache/pacman/pkg
 
-ゲストも Arch Linux なので  
+コンテナ内で  
 
 	pacman -Sy bash-completion openssh
 
 arch linux は python3 がデフォルトなので  
+ansible が python2 を使えるようにする  
 (centos8 も python3 になるようなので気をつける)  
 
 	pacman -Sy python2 zshq
@@ -208,7 +209,7 @@ ssh でコンテナにログイン
 
 	ssh archtest
 
-## debian のテスト用コンテナを作る
+## debian のテスト用コンテナを作る場合
 
 	sudo pacman debootstrap
 	yaourt -S debian-archive-keyring
