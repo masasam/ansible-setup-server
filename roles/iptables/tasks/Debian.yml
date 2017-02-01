@@ -7,10 +7,3 @@
 - name: deploy /etc/iptables/rules.v6
   become: yes
   copy: src=rules.v6 dest=/etc/iptables/rules.v6 owner=root group=root mode=640 backup=yes
-- name: reload netfilter-persistent
-  command: /usr/sbin/netfilter-persistent reload
-  args:
-    creates: /etc/iptables/flg
-- name: touch iptables flg
-  file:
-    path: /etc/iptables/flg
