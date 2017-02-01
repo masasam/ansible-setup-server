@@ -207,6 +207,19 @@ ssh でコンテナにログイン
 
 	ssh archtest
 
+#### debian のテスト用コンテナを作る
+
+	sudo pacman debootstrap
+	yaourt -S debian-archive-keyring
+
+	mkdir debian
+	sudo debootstrap jessie debian http://ftp.jaist.ac.jp/pub/Linux/debian/
+
+	sudo chroot debian
+	passwd root
+
+	sudo systemd-nspawn -b -D ~/debian
+
 #### ubuntu のテスト用コンテナを作る
 
 	sudo pacman debootstrap
@@ -224,15 +237,3 @@ ssh でコンテナにログイン
 
 	vi /etc/resolv.comf
 	nameserver 192.168.0.1
-
-#### debian
-
-	yaourt -S debian-archive-keyring
-
-	mkdir debian
-	sudo debootstrap jessie debian http://ftp.jaist.ac.jp/pub/Linux/debian/
-
-	sudo chroot debian
-	passwd root
-
-	sudo systemd-nspawn -b -D ~/debian
