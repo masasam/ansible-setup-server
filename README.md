@@ -5,8 +5,11 @@
 
 ## ansible でプロビジョニングしたいサーバーを準備
 
-centos 対応はすぐできるので対象サーバーを archlinux とした  
-(自分サーバーが archlinux で構築してるからというくだらない理由)  
+対象 OS は  
+Archlinux(100%)  
+debian stretch(80%)  
+centos は 8 になったらやる(0%)  
+括弧内は進捗  
 
 root で ansible で利用する user を作成  
 user 名は ansible にする  
