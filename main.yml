@@ -2,7 +2,7 @@
   user: "{{ username }}"
   become: yes
   vars:
-    - include: vars/private.yml
+    - include: vars/vps.yml
   roles:
     - git
     - go
