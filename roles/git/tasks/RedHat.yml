@@ -1,8 +1,6 @@
-- name: Add epel repository
-  yum_repository:
-    name: epel
-    description: EPEL YUM repo
-    baseurl: https://download.fedoraproject.org/pub/epel/$releasever/$basearch/
+- name: install epel-release
+  yum: name=epel-release state=present
+  when: ansible_os_family == 'RedHat'
 - name: install git
   yum: name=git state=present
   when: ansible_os_family == 'RedHat'
