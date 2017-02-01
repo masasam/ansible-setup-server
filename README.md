@@ -206,3 +206,33 @@ ssh でつながるようになったから次回以降はバックグラウン�
 ssh でコンテナにログイン
 
 	ssh archtest
+
+#### ubuntu のテスト用コンテナを作る
+
+	sudo pacman debootstrap
+	yaourt -S ubuntu-keyring
+
+	mkdir ubuntu
+	sudo debootstrap xenial ubuntu http://ftp.jaist.ac.jp/pub/Linux/ubuntu/
+
+	sudo chroot ubuntu
+	passwd root
+
+	sudo systemd-nspawn -b -D ~/ubuntu
+
+ネームサーバーを指定してネットにつなげる  
+
+	vi /etc/resolv.comf
+	nameserver 192.168.0.1
+
+#### debian
+
+	yaourt -S debian-archive-keyring
+
+	mkdir debian
+	sudo debootstrap jessie debian http://ftp.jaist.ac.jp/pub/Linux/debian/
+
+	sudo chroot debian
+	passwd root
+
+	sudo systemd-nspawn -b -D ~/debian
