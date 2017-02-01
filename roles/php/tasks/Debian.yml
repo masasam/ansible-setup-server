@@ -1,14 +1,14 @@
 - name: install php
-  apt: name=php5-fpm state=present
+  apt: name=php-fpm state=present
   when: ansible_os_family == 'Debian'
 - name: deploy php.ini
   copy:
     src: php.ini
-    dest: /etc/php/php.ini
+    dest: /etc/php/7.0/fpm/php.ini
 - name: deploy php-fpm.conf
   copy:
     src: php-fpm.conf
-    dest: /etc/php/php-fpm.conf
+    dest: /etc/php/7.0/fpm/php-fpm.conf
 - name: systemctl enable php-fpm
   systemd:
     name: php-fpm

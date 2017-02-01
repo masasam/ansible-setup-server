@@ -1,0 +1,16 @@
+- name: install php
+  yum: name=php-fpm state=present
+  when: ansible_os_family == 'RedHat'
+- name: deploy php.ini
+  copy:
+    src: php.ini
+    dest: /etc/php.ini
+- name: deploy php-fpm.conf
+  copy:
+    src: php-fpm.conf
+    dest: /etc/php-fpm.conf
+- name: systemctl enable php-fpm
+  systemd:
+    name: php-fpm
+    state: started
+    enabled: True
