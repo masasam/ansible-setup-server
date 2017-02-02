@@ -43,3 +43,7 @@
   mysql_db: db=test state=absent
 - name: create database
   mysql_user: name={{ dbname }} password={{ dbpassword }} priv=*.*:ALL state=present
+- name: systemctl enable mariadb
+  systemd:
+    name: mariadb
+    enabled: True
