@@ -1,9 +1,4 @@
-## 自分のマシンに ansible をインストール
-
-    sudo pacman -S ansible
-	ghq get -p masasam/ansible-vps
-
-## ansible でプロビジョニングしたいサーバーを準備
+## ansible でプロビジョニングしたいサーバーの準備
 
 対象 OS  
 Archlinux  
@@ -52,6 +47,11 @@ visudo
 
     ## Same thing without a password
     %wheel ALL=(ALL) NOPASSWD: ALL
+
+## 自分のマシンに ansible をインストール
+
+    sudo pacman -S ansible
+	ghq get -p masasam/ansible-vps
 
 ## プロビジョニングを実行
 
