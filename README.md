@@ -287,7 +287,7 @@ root に戻って
 	systemctl enable sshd
 	systemctl start sshd
 
-ホスト名を設定(archlinux とする)  
+ホスト名を設定(centos とする)  
 
     hostname centos
 
