@@ -13,11 +13,9 @@ local CYAN=$'%{\e[36m%}'
 local WHITE=$'%{\e[37m%}'
 local DEFAULT=$'%{\e[m%}'
 who=`whoami`
-PROMPT="[%D{%m-%d %H:%M:%S} $CYAN%n$DEFAULT@$GREEN%m $BLUE%/$DEFAULT]
-"
+PROMPT="[%(?.%D{%m-%d %H:%M:%S}.$YELLOW%D{%m-%d %H:%M:%S}) $CYAN%n$DEFAULT@$GREEN%m $BLUE%/$DEFAULT]"
 if [[ $who == "root" ]]; then
-PROMPT="[%D{%m-%d %H:%M:%S} $RED%n$DEFAULT@$GREEN%m $BLUE%/$DEFAULT]
-"
+   PROMPT="[%(?.%D{%m-%d %H:%M:%S}.$YELLOW%D{%m-%d %H:%M:%S}) $RED%n$DEFAULT@$GREEN%m $BLUE%/$DEFAULT]"
 fi
 
 
