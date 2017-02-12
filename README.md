@@ -1,12 +1,12 @@
-## ansible でプロビジョニングしたいサーバーの準備
+## Preparing the server you want to provision with ansible
 
-対象 OS  
-Archlinux  
-Debian8 stretch  
-Centos7  
+Target OS  
+- Archlinux  
+- Debian8 stretch  
+- Centos7  
 
-root で ansible で利用する user を作成  
-user 名は ansible にする  
+Create user to use with ansible as root  
+User name should be ansible  
 
     useradd -m -G wheel -s /bin/zsh ansible
 	su - ansible
@@ -16,12 +16,12 @@ user 名は ansible にする
 	chmod 600 authorized_keys
 	vi authorized_keys ← id_rsa.pub キーを登録
 
-root に戻って  
+Return to root  
 
 	systemctl enable sshd
 	systemctl start sshd
 
-ホスト名を設定(archlinux とする)  
+Set host name  
 
     hostname archlinux
 
@@ -31,12 +31,12 @@ vi /etc/hosts
 
 vi /etc/pam.d/su  
 
-    # コメントアウトを外す
+    # Remove comment out
     auth required pam_wheel.so use_uid
 
 visudo  
 
-    #Defaults    requiretty(コメントアウトしてあるか確認)
+    #Defaults    requiretty(Confirm whether commented out)
 
     ## User privilege specification
     root ALL=(ALL) ALL
@@ -48,89 +48,87 @@ visudo
     ## Same thing without a password
     %wheel ALL=(ALL) NOPASSWD: ALL
 
-## 自分のマシンに ansible をインストール
+## Install ansible on my machine
 
     sudo pacman -S ansible
 	ghq get -p masasam/ansible-vps
 
-## プロビジョニングを実行
+## Perform provisioning by ansible
 
 	ansible-playbook main.yml
 
-group_vars/vps.yml に変数とパスワードを書いておく  
-vps.yml はあらかじめ以下のコマンドで暗号化しておく  
+Write variables and passwords in group_vars/vps.yml  
+Encrypt vps.yml in advance with the following command  
 
 	ansible-vault encrypt vps.yml
 
-ansible.cfg に暗号のパスワードの場所を書いておくと毎回パスワードを打たなくていい  
-(中身はパスワードだけ)  
+If you write the location of the cryptographic password in  
+ansible.cfg, you do not have to hit the password each time  
+(The contents are only the password)  
 
 	vault_password_file = ~/Dropbox/ansible/vault_pass
 
-vps.yml の中身  
+What is in vps.yml  
 
-	hostname: 'yourhost' ← linux ホスト名
-	domain: 'yourdomain' ← メインドメイン
-	subdomain: 'subdomain.yourdomain' ← サブドメイン(blog に使う)
-	username: 'ansible' ← ansible が ssh する user 名
-	mailroot: 'youremailaddress' ← root のメールを転送するメールアドレス
-	monitalert: 'youremailaddress' ← monit からのアラートメールの宛先
+	hostname: 'yourhost' ← Linux host name
+	domain: 'yourdomain' ← Main domain
+	subdomain: 'subdomain.yourdomain' ← sub domain(using blog)
+	username: 'ansible' ← User name ansible ssh
+	mailroot: 'youremailaddress' ← E-mail address to transfer root's mail
+	monitalert: 'youremailaddress' ← Destination of alert mail from monit
 	infopassword: '913336a8ecba7764cd81245c2c6b'
-	mariadbrootpassword: 'mariadbrootpassword' ← mariadb の root ユーザーのパスワード
-	mackerelapikey: 'yourmackerelapikey' ← mackerel の apikey
-	dbname: 'yourdbbame' ← mariadb で利用する DB 名
-	dbpassword: 'yourdbpassword' ← そのパスワード
-    docroot: '/home/html' ← メインドキュメントルート
-    docrootblog: '/home/blog' ← blog のドキュメントルート
-    docrootadminer: '/usr/share/webapps/adminer' ← adminer のドキュメントルート
+	mariadbrootpassword: 'mariadbrootpassword' ← The password of the mariadb root user
+	mackerelapikey: 'yourmackerelapikey' ← mackerel's apikey
+	dbname: 'yourdbbame' ← DB name used in mariadb
+	dbpassword: 'yourdbpassword' ← That password
+    docroot: '/home/html' ← Main document route for nginx
+    docrootblog: '/home/blog' ← Document root of blog for nginx
+    docrootadminer: '/usr/share/webapps/adminer' ← Adminer's document root for nginx
 
-infopassword は info@yourdomain のメールアドレスのパスワードになる  
-infopassword の作り方  
+Infopassword will be the password for the email address of info@yourdomain
+How to make infopassword  
 
     doveadm pw
 	Enter new password: yourpassword
 	Retype new password: yourpassword
 
-と打つと
+With
 
 	{CRAM-MD5}913336a8ecba7764cd81245c2c6b
 
-がでるので
+Because it is
 
 	infopassword: '913336a8ecba7764cd81245c2c6b'
 
-とする
-
-#### サーバーのアップデートだけする playbook
+#### Update the server only playbook
 
     ansible-playbook update.yml
 
-## テスト用ゲストコンテナをローカルに作る
+## Make a test guest container locally
 
----- テスト環境が不要なら以下は必要ない ----
+---- If a test environment is unnecessary, you do not need the following ----
 
-ゲスト環境は本番環境の vps と  
-ゲストテスト環境の systemd-nspawn  
-以下 systemd-nspawn は vps では ssh で読み替えて構築する  
+The guest environment is vps of the production environment In the
+guest test environment systemd-nspawn  
+In the following, systemd-nspawn is constructed by reading with ssh in vps  
 
-テスト用コンテナを用意
+Preparing a test container  
 
 	sudo pacman -S arch-install-scripts
 	mkdir systemdcontainer
 	sudo pacstrap -i -c -d ~/systemdcontainer base base-devel --ignore linux
     sudo systemd-nspawn -b -D ~/systemdcontainer --bind=/var/cache/pacman/pkg
 
-コンテナ内で  
+In the container  
 
 	pacman -Sy bash-completion openssh
 
-arch linux は python3 がデフォルトなので  
-ansible が python2 を使えるようにする  
-(centos8 も python3 になるようなので気をつける)  
+Arch linux is the default for python 3 Make ansible use python 2  
+It seems that centos8 also becomes python 3, so be careful  
 
 	pacman -Sy python2 zsh
 
-ansible で利用する user を作成  
+Create user to use with ansible  
 
     useradd -m -G wheel -s /bin/zsh ansible
 	su - ansible
@@ -138,14 +136,14 @@ ansible で利用する user を作成
 	cd .ssh/
 	mv id_rsa.pub authorized_keys
 	chmod 600 authorized_keys
-	vi authorized_keys ← id_rsa.pub キーを登録
+	vi authorized_keys ← Add your id_rsa.pub key
 
-root に戻って  
+Return to root  
 
 	systemctl enable sshd
 	systemctl start sshd
 
-ホスト名を設定
+Set host name  
 
     hostname archtest
 
@@ -153,20 +151,20 @@ vi /etc/hosts
 
     127.0.0.1   localhost.localdomain   localhost archtest
 
-#### root になれるユーザを wheel グループに属するユーザのみにする
+#### Make the user who can become root only users belonging to the wheel group
 
     usermod -G wheel ansible
 
 vi /etc/pam.d/su  
 
-    # コメントアウトを外す
+    # Remove comment out
     auth required pam_wheel.so use_uid
 
-#### sudo が使えるユーザ（グループ）を設定する
+#### Set up a user (group) that sudo can use
 
 visudo  
 
-    #Defaults    requiretty(centos の場合のみコメントアウトしておく)
+    #Defaults    requiretty(Comment out only for centos)
 
     ## User privilege specification
     root ALL=(ALL) ALL
@@ -178,25 +176,25 @@ visudo
     ## Same thing without a password
     %wheel ALL=(ALL) NOPASSWD: ALL
 
+Shutdown at  
 >Ctrl-]]]
-でシャットダウン
 
-ssh でつながるようになったから次回以降はバックグラウンドで起動してよい。  
-(ssh でログインしてシャットダウンできるようになったため)  
+Since it became possible to connect with ssh, you can start it in the background from next time onwards.  
+(Now that you can log in with ssh and shut it down)  
 
     sudo systemd-nspawn -b -D ~/systemdcontainer --bind=/var/cache/pacman/pkg &
 
-.ssh/config に以下を設定して
+Set the following in .ssh/config  
 
 	Host archtest
                         HostName localhost
                         User ansible
 
-ssh でコンテナにログイン
+Login to container with ssh  
 
 	ssh archtest
 
-## debian のテスト用コンテナを作る場合
+## When creating a debian test container
 
 	sudo pacman debootstrap
 	yaourt -S debian-archive-keyring
@@ -209,7 +207,7 @@ ssh でコンテナにログイン
 
 	sudo systemd-nspawn -b -D ~/debian
 
-ここから debian 仮想サーバー  
+From here debian virtual server  
 
 	apt-get install python openssh-server zsh bash-completion sudo
 
@@ -219,14 +217,14 @@ ssh でコンテナにログイン
 	cd .ssh/
 	mv id_rsa.pub authorized_keys
 	chmod 600 authorized_keys
-	vi authorized_keys ← id_rsa.pub キーを登録
+	vi authorized_keys ← Add your id_rsa.pub key
 
-root に戻って  
+Return to root  
 
 	systemctl enable ssh
 	systemctl start ssh
 
-ホスト名を設定(debian とする)  
+Set host name  
 
     hostname debian
 
@@ -234,13 +232,11 @@ vi /etc/hosts
 
     127.0.0.1       localhost debian
 
-sudo が使えるユーザ（グループ）を設定する  
+Set up a user (group) that sudo can use
 
 	update-alternatives --config editor
 
 visudo  
-
-    #Defaults    requiretty(コメントアウトしてあるか確認)
 
     ## User privilege specification
     root ALL=(ALL) ALL
@@ -252,7 +248,7 @@ visudo
     ## Same thing without a password
     %sudo ALL=(ALL) NOPASSWD: ALL
 
-## centos のテスト用コンテナを作る場合
+## When creating a test container for centos
 
 	yaourt yum
 	mkdir centos
@@ -270,8 +266,8 @@ visudo
 
 	sudo systemd-nspawn -b -D ~/centos
 
-root で ansible で利用する user を作成  
-user 名は ansible にする  
+Create user to use with ansible as root  
+User name should be ansible  
 
 	yum install python openssh-server zsh bash-completion sudo
     useradd -m -G wheel -s /bin/zsh ansible
@@ -280,14 +276,14 @@ user 名は ansible にする
 	cd .ssh/
 	mv id_rsa.pub authorized_keys
 	chmod 600 authorized_keys
-	vi authorized_keys ← id_rsa.pub キーを登録
+	vi authorized_keys ← Add your id_rsa.pub key
 
-root に戻って  
+Return to root  
 
 	systemctl enable sshd
 	systemctl start sshd
 
-ホスト名を設定(centos とする)  
+Set host name  
 
     hostname centos
 
@@ -297,14 +293,14 @@ vi /etc/hosts
 
 vi /etc/pam.d/su  
 
-    # コメントアウトを外す
+    # Remove comment out
     auth required pam_wheel.so use_uid
 
-sudo が使えるユーザ（グループ）を設定する  
+Set up a user (group) that sudo can use  
 
 visudo  
 
-    #Defaults    requiretty(コメントアウトしてあるか確認)
+    #Defaults    requiretty(Confirm whether commented out)
 
     ## User privilege specification
     root ALL=(ALL) ALL
