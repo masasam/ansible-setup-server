@@ -14,7 +14,7 @@ User name should be ansible
 	cd .ssh/
 	mv id_rsa.pub authorized_keys
 	chmod 600 authorized_keys
-	curl https://github.com/masasam.keys -o ~/.ssh/authorized_keys ← Register public key registered with github
+	curl https://github.com/masasam.keys >> ~/.ssh/authorized_keys ← Register public key registered with github
 
 Return to root  
 
@@ -136,7 +136,7 @@ Create user to use with ansible
 	cd .ssh/
 	mv id_rsa.pub authorized_keys
 	chmod 600 authorized_keys
-	curl https://github.com/masasam.keys -o ~/.ssh/authorized_keys ← Register public key registered with github
+	curl https://github.com/masasam.keys >> ~/.ssh/authorized_keys ← Register public key registered with github
 
 Return to root  
 
@@ -217,7 +217,7 @@ From here debian virtual server
 	cd .ssh/
 	mv id_rsa.pub authorized_keys
 	chmod 600 authorized_keys
-	curl https://github.com/masasam.keys -o ~/.ssh/authorized_keys ← Register public key registered with github
+	curl https://github.com/masasam.keys >> ~/.ssh/authorized_keys ← Register public key registered with github
 
 Return to root  
 
@@ -276,7 +276,7 @@ User name should be ansible
 	cd .ssh/
 	mv id_rsa.pub authorized_keys
 	chmod 600 authorized_keys
-	curl https://github.com/masasam.keys -o ~/.ssh/authorized_keys ← Register public key registered with github
+	curl https://github.com/masasam.keys >> ~/.ssh/authorized_keys ← Register public key registered with github
 
 Return to root  
 
