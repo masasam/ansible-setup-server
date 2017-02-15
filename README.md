@@ -5,9 +5,12 @@ Target OS
 - Debian8 stretch  
 - Centos7  
 
+#### The target archlinux server for ansible
+
 Create user to use with ansible as root  
 User name should be ansible  
 
+	pacman -S curl zsh openssh
     useradd -m -G wheel -s /bin/zsh ansible
 	su - ansible
 	ssh-keygen -t rsa -b 4096
