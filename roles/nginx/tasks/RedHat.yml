@@ -48,6 +48,16 @@
   get_url:
     url: "https://github.com/vrana/adminer/releases/download/v4.2.5/adminer-4.2.5.php"
     dest: /usr/share/webapps/adminer/adminer.php
+- name: make nginx.service.d directory
+  file:
+    path=/etc/systemd/system/nginx.service.d
+    state=directory
+    owner=root
+    group=root
+    mode=0755
+- name: deploy nginx.service.d/limits.conf
+  become: yes
+  copy: src=limits.conf dest=/etc/systemd/system/nginx.service.d/limits.conf owner=root group=root mode=644 backup=yes
 - name: nginx start
   systemd:
     name: nginx
