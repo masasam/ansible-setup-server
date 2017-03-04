@@ -63,6 +63,7 @@
     name: nginx
     state: started
     enabled: True
+    daemon_reload: yes
 - name: deploy certbot.service
   become: yes
   copy: src=certbot.service dest=/etc/systemd/system/certbot.service owner=root group=root mode=644 backup=yes
