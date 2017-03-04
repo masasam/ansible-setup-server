@@ -16,6 +16,16 @@
   copy:
     src: centos.my.cnf
     dest: /etc/my.cnf
+- name: make mariadb.service.d directory
+  file:
+    path=/etc/systemd/system/mariadb.service.d
+    state=directory
+    owner=root
+    group=root
+    mode=0755
+- name: deploy mariadb.service.d/limits.conf
+  become: yes
+  copy: src=limits.conf dest=/etc/systemd/system/mariadb.service.d/limits.conf owner=root group=root mode=644 backup=yes
 - name: mariadb start
   service:
     name=mariadb state=started
@@ -48,3 +58,4 @@
   systemd:
     name: mariadb
     enabled: True
+    daemon_reload: yes
