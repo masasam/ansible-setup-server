@@ -108,6 +108,16 @@
   copy:
     src: auth-vpopmail.conf.ext
     dest: /etc/dovecot/conf.d/auth-vpopmail.conf.ext
+- name: make dovecot.service.d directory
+  file:
+    path=/etc/systemd/system/dovecot.service.d
+    state=directory
+    owner=root
+    group=root
+    mode=0755
+- name: deploy dovecot.service.d/limits.conf
+  become: yes
+  copy: src=limits.conf dest=/etc/systemd/system/dovecot.service.d/limits.conf owner=root group=root mode=644 backup=yes
 - name: systemctl enable postfix
   systemd:
     name: postfix
@@ -118,3 +128,4 @@
     name: dovecot
     state: started
     enabled: True
+    daemon_reload: yes
