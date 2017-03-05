@@ -5,9 +5,8 @@
   apt: name=dovecot-pop3d state=present
   when: ansible_os_family == 'Debian'
 - name: render dovecot-passwd
-  template:
-    src=templates/passwd.j2
-    dest=/etc/dovecot/passwd
+  template: src=templates/passwd.j2 dest=/etc/dovecot/passwd
+  notify: restart dovecot
 - name: render dovecot-ssl.conf
   template:
     src=templates/10-ssl.conf.j2
