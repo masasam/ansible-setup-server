@@ -15,9 +15,8 @@
 - name: adminer directory
   file: path={{ docrootadminer }} state=directory owner=root group=root mode=0755
 - name: render nginx.conf
-  template:
-    src=templates/nginx.conf.j2
-    dest=/etc/nginx/nginx.conf
+  template: src=templates/nginx.conf.j2 dest=/etc/nginx/nginx.conf
+  notify: restart nginx
 - name: install certbot
   yum: name=certbot state=present
   when: ansible_os_family == 'RedHat'
