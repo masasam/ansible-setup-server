@@ -125,9 +125,7 @@ server {
 server {
     listen 443 default ssl http2;
     ssl on;
-    # サーバ証明書（サーバ証明書に中間CA証明書を連結したもの）
     ssl_certificate      /etc/letsencrypt/live/{{ domain }}/fullchain.pem;
-    # 秘密鍵
     ssl_certificate_key  /etc/letsencrypt/live/{{ domain }}/privkey.pem;
 
     server_name {{ domain }};
@@ -151,9 +149,7 @@ server {
     listen 443 ssl http2;
     server_name {{ subdomain }};
     ssl on;
-    # サーバ証明書（サーバ証明書に中間CA証明書を連結したもの）
     ssl_certificate      /etc/letsencrypt/live/{{ subdomain }}/fullchain.pem;
-    # 秘密鍵
     ssl_certificate_key  /etc/letsencrypt/live/{{ subdomain }}/privkey.pem;
 
     location / {
