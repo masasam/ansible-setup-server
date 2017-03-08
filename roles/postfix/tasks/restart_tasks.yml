@@ -1,0 +1,24 @@
+- name: Restart conditionally step 1
+  command: postmap /etc/postfix/vmailbox
+  become: yes
+  register: result
+- name: Restart conditionally step 2
+  command: postmap /etc/postfix/virtual
+  become: yes
+  when: result
+- name: Restart conditionally step 3
+  command: postalias hash:/etc/aliases
+  become: yes
+  when: result
+- name: Restart conditionally step 4
+  command: newaliases
+  become: yes
+  when: result
+- name: Restart conditionally step 5
+  systemd: name=postfix state=restarted
+  become: yes
+  when: result
+
+
+
+
