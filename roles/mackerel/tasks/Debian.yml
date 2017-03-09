@@ -6,9 +6,8 @@
 - name: systemd directory
   file: path=/usr/lib/systemd/system state=directory owner=root group=root mode=755
 - name: render mackerel-agent.conf
-  template:
-    src=templates/mackerel-agent.conf.j2
-    dest=/etc/mackerel-agent/mackerel-agent.conf
+  template: src=templates/mackerel-agent.conf.j2 dest=/etc/mackerel-agent/mackerel-agent.conf
+  notify: restart mackerel
 - name: deploy mackerel.service
   become: yes
   copy: src=mackerel.service dest=/usr/lib/systemd/system/mackerel.service owner=root group=root mode=644 backup=yes
