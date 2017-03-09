@@ -43,6 +43,7 @@
   template:
     src=templates/mariadb.j2
     dest=/etc/monit/monitrc.d/mariadb
+  notify: reload monit
 - name: systemctl enable monit
   systemd:
     name: monit
