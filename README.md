@@ -2,7 +2,7 @@
 
 Target OS  
 - Archlinux  
-- Debian8 stretch  
+- Debian9 stretch  
 - Centos7  
 
 #### The target archlinux server for ansible
