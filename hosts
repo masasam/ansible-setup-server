@@ -1,5 +1,5 @@
-[vps]
-vps ansible_python_interpreter=python2
+[server]
+google-conpute-engine ansible_python_interpreter=python2
 # [testserver]
 # archtest ansible_python_interpreter=python2
 # debiantest ansible_python_interpreter=python2
