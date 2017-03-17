@@ -1,5 +1,14 @@
 - name: install postfix
+  become: yes
   yum: name=postfix state=present
+  when: ansible_os_family == 'RedHat'
+- name: install cyrus-sasl-plain
+  become: yes
+  yum: name=cyrus-sasl-plain state=present
+  when: ansible_os_family == 'RedHat'
+- name: install cyrus-sasl-md5
+  become: yes
+  yum: name=cyrus-sasl-md5 state=present
   when: ansible_os_family == 'RedHat'
 - name: render main.cf
   template:

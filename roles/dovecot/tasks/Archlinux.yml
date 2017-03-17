@@ -1,46 +1,58 @@
 - name: install dovecot
+  become: yes
   pacman: name=dovecot state=present
   when: ansible_os_family == 'Archlinux'
 - name: render dovecot-passwd
+  become: yes
   template: src=templates/passwd.j2 dest=/etc/dovecot/passwd
   notify: restart dovecot
 - name: render dovecot-ssl.conf
+  become: yes
   template:
     src=templates/10-ssl.conf.j2
     dest=/etc/dovecot/conf.d/10-ssl.conf
 - name: deploy dovecot.conf
+  become: yes
   copy:
     src: dovecot.conf
     dest: /etc/dovecot/dovecot.conf
 - name: deploy dovecot/10-auth.conf
+  become: yes
   copy:
     src: 10-auth.conf
     dest: /etc/dovecot/conf.d/10-auth.conf
 - name: deploy dovecot/10-director.conf
+  become: yes
   copy:
     src: 10-director.conf
     dest: /etc/dovecot/conf.d/10-director.conf
 - name: deploy dovecot/10-logging.conf
+  become: yes
   copy:
     src: 10-logging.conf
     dest: /etc/dovecot/conf.d/10-logging.conf
 - name: deploy dovecot/10-mail.conf
+  become: yes
   copy:
     src: 10-mail.conf
     dest: /etc/dovecot/conf.d/10-mail.conf
 - name: deploy dovecot/10-master.conf
+  become: yes
   copy:
     src: 10-master.conf
     dest: /etc/dovecot/conf.d/10-master.conf
 - name: deploy dovecot/15-lda.conf
+  become: yes
   copy:
     src: 15-lda.conf
     dest: /etc/dovecot/conf.d/15-lda.conf
 - name: deploy dovecot/15-mailboxes.conf
+  become: yes
   copy:
     src: 15-mailboxes.conf
     dest: /etc/dovecot/conf.d/15-mailboxes.conf
 - name: deploy dovecot/20-imap.conf
+  become: yes
   copy:
     src: 20-imap.conf
     dest: /etc/dovecot/conf.d/20-imap.conf

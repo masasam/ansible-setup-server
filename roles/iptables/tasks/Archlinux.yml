@@ -2,6 +2,7 @@
   become: yes
   copy: src=iptables.rules dest=/etc/iptables/iptables.rules owner=root group=root mode=644 backup=yes
 - name: systemctl enable iptables
+  become: yes
   systemd:
     name: iptables
     state: started

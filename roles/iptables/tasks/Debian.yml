@@ -1,4 +1,5 @@
 - name: install iptables-persistent
+  become: yes
   apt: name=iptables-persistent state=present
   when: ansible_os_family == 'Debian'
 - name: deploy /etc/iptables/rules.v4
