@@ -3,7 +3,7 @@
   when: ansible_os_family == 'Debian'
 - name: deploy zshrc at ansible
   become: yes
-  become_user: ansible
+  become_user: "{{ username }}"
   copy:
     src: zshrc
     dest: ~/.zshrc
