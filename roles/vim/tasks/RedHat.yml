@@ -1,9 +1,9 @@
 - name: install vim
   yum: name=vim state=present
   when: ansible_os_family == 'RedHat'
-- name: deploy vimrc at ansible
+- name: deploy vimrc at user
   become: yes
-  become_user: ansible
+  become_user: "{{ username }}"
   copy:
     src: vimrc
     dest: ~/.vimrc
