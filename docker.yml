@@ -1,18 +1,15 @@
 - hosts: docker
   connection: docker
-  user: "{{ username }}"
   become: yes
   vars:
     - include: vars/server.yml
   roles:
     - git
     - go
-    - nginx
     - mariadb
     - postfix
     - dovecot
     - vim
     - zsh
-    - monit
     - mackerel
     - others
