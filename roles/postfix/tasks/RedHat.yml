@@ -11,41 +11,52 @@
   yum: name=cyrus-sasl-md5 state=present
   when: ansible_os_family == 'RedHat'
 - name: render main.cf
+  become: yes
   template:
     src=templates/centos.main.cf.j2
     dest=/etc/postfix/main.cf
 - name: render vmailbox
+  become: yes
   template: src=templates/vmailbox.j2 dest=/etc/postfix/vmailbox
   notify: Restart conditionally
 - name: deploy master.cf
+  become: yes
   copy:
     src: master.cf
     dest: /etc/postfix/master.cf
 - name: deploy virtual
+  become: yes
   copy:
     src: virtual
     dest: /etc/postfix/virtual
 - name: create group vmail
+  become: yes
   group: name=vmail gid=5000
 - name: create users vmail
+  become: yes
   user: name=vmail uid=5000 state=present groups=vmail shell=/usr/bin/nologin home=/home/vmail createhome=yes
 - name: postmap vmailbox
+  become: yes
   command: postmap /etc/postfix/vmailbox
   args:
     creates: /etc/postfix/vmailbox.db
 - name: postmap virtual
+  become: yes
   command: postmap /etc/postfix/virtual
   args:
     creates: /etc/postfix/virtual.db
 - name: deploy /etc/aliases
+  become: yes
   command: mv /etc/postfix/aliases /etc/aliases
   args:
     creates: /etc/aliases
 - name: root mail
+  become: yes
   lineinfile:
     dest: /etc/aliases
     line: "root: {{ mailroot }}"
 - name: newaliases
+  become: yes
   command: postalias hash:/etc/aliases
   args:
     creates: /etc/aliases.db

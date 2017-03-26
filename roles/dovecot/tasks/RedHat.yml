@@ -1,110 +1,138 @@
 - name: install dovecot
+  become: yes
   yum: name=dovecot state=present
   when: ansible_os_family == 'RedHat'
 - name: render dovecot-passwd
+  become: yes
   template: src=templates/passwd.j2 dest=/etc/dovecot/passwd
   notify: restart dovecot
 - name: render dovecot-ssl.conf
+  become: yes
   template:
     src=templates/10-ssl.conf.j2
     dest=/etc/dovecot/conf.d/10-ssl.conf
 - name: deploy dovecot.conf
+  become: yes
   copy:
     src: dovecot.conf
     dest: /etc/dovecot/dovecot.conf
 - name: deploy dovecot/10-auth.conf
+  become: yes
   copy:
     src: 10-auth.conf
     dest: /etc/dovecot/conf.d/10-auth.conf
 - name: deploy dovecot/10-director.conf
+  become: yes
   copy:
     src: 10-director.conf
     dest: /etc/dovecot/conf.d/10-director.conf
 - name: deploy dovecot/10-logging.conf
+  become: yes
   copy:
     src: 10-logging.conf
     dest: /etc/dovecot/conf.d/10-logging.conf
 - name: deploy dovecot/10-mail.conf
+  become: yes
   copy:
     src: 10-mail.conf
     dest: /etc/dovecot/conf.d/10-mail.conf
 - name: deploy dovecot/10-master.conf
+  become: yes
   copy:
     src: 10-master.conf
     dest: /etc/dovecot/conf.d/10-master.conf
 - name: deploy dovecot/15-lda.conf
+  become: yes
   copy:
     src: 15-lda.conf
     dest: /etc/dovecot/conf.d/15-lda.conf
 - name: deploy dovecot/15-mailboxes.conf
+  become: yes
   copy:
     src: 15-mailboxes.conf
     dest: /etc/dovecot/conf.d/15-mailboxes.conf
 - name: deploy dovecot/20-imap.conf
+  become: yes
   copy:
     src: 20-imap.conf
     dest: /etc/dovecot/conf.d/20-imap.conf
 - name: deploy dovecot/20-lmtp.conf
+  become: yes
   copy:
     src: 20-lmtp.conf
     dest: /etc/dovecot/conf.d/20-lmtp.conf
 - name: deploy dovecot/20-pop3.conf
+  become: yes
   copy:
     src: 20-pop3.conf
     dest: /etc/dovecot/conf.d/20-pop3.conf
 - name: deploy dovecot/90-acl.conf
+  become: yes
   copy:
     src: 90-acl.conf
     dest: /etc/dovecot/conf.d/90-acl.conf
 - name: deploy dovecot/90-plugin.conf
+  become: yes
   copy:
     src: 90-plugin.conf
     dest: /etc/dovecot/conf.d/90-plugin.conf
 - name: deploy dovecot/90-quota.conf
+  become: yes
   copy:
     src: 90-quota.conf
     dest: /etc/dovecot/conf.d/90-quota.conf
 - name: deploy dovecot/auth-checkpassword.conf.ext
+  become: yes
   copy:
     src: auth-checkpassword.conf.ext
     dest: /etc/dovecot/conf.d/auth-checkpassword.conf.ext
 - name: deploy dovecot/auth-deny.conf.ext
+  become: yes
   copy:
     src: auth-deny.conf.ext
     dest: /etc/dovecot/conf.d/auth-deny.conf.ext
 - name: deploy dovecot/auth-dict.conf.ext
+  become: yes
   copy:
     src: auth-dict.conf.ext
     dest: /etc/dovecot/conf.d/auth-dict.conf.ext
 - name: deploy dovecot/auth-ldap.conf.ext
+  become: yes
   copy:
     src: auth-ldap.conf.ext
     dest: /etc/dovecot/conf.d/auth-ldap.conf.ext
 - name: deploy dovecot/auth-master.conf.ext
+  become: yes
   copy:
     src: auth-master.conf.ext
     dest: /etc/dovecot/conf.d/auth-master.conf.ext
 - name: deploy dovecot/auth-passwdfile.conf.ext
+  become: yes
   copy:
     src: auth-passwdfile.conf.ext
     dest: /etc/dovecot/conf.d/auth-passwdfile.conf.ext
 - name: deploy dovecot/auth-sql.conf.ext
+  become: yes
   copy:
     src: auth-sql.conf.ext
     dest: /etc/dovecot/conf.d/auth-sql.conf.ext
 - name: deploy dovecot/auth-static.conf.ext
+  become: yes
   copy:
     src: auth-static.conf.ext
     dest: /etc/dovecot/conf.d/auth-static.conf.ext
 - name: deploy dovecot/auth-system.conf.ext
+  become: yes
   copy:
     src: auth-system.conf.ext
     dest: /etc/dovecot/conf.d/auth-system.conf.ext
 - name: deploy dovecot/auth-vpopmail.conf.ext
+  become: yes
   copy:
     src: auth-vpopmail.conf.ext
     dest: /etc/dovecot/conf.d/auth-vpopmail.conf.ext
 - name: make dovecot.service.d directory
+  become: yes
   file:
     path=/etc/systemd/system/dovecot.service.d
     state=directory
@@ -115,11 +143,13 @@
   become: yes
   copy: src=limits.conf dest=/etc/systemd/system/dovecot.service.d/limits.conf owner=root group=root mode=644 backup=yes
 - name: systemctl enable postfix
+  become: yes
   systemd:
     name: postfix
     state: started
     enabled: True
 - name: systemctl enable dovecot
+  become: yes
   systemd:
     name: dovecot
     state: started
