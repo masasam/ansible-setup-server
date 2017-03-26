@@ -1,4 +1,5 @@
-- hosts: server
+- hosts: docker
+  connection: docker
   user: "{{ username }}"
   become: yes
   vars:
