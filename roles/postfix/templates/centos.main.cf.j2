@@ -688,3 +688,11 @@ virtual_mailbox_maps = hash:/etc/postfix/vmailbox
 virtual_uid_maps = static:5000
 virtual_gid_maps = static:5000
 virtual_alias_maps = hash:/etc/postfix/virtual
+
+# gcp
+relayhost = [smtp.sendgrid.net]:2525
+smtp_tls_security_level = encrypt
+smtp_sasl_auth_enable = yes
+smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+header_size_limit = 4096000
+smtp_sasl_security_options = noanonymous
