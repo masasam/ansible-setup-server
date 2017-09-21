@@ -5,7 +5,7 @@ Target OS
 - Debian9 stretch  
 - Centos7  
 
-#### The target archlinux server for ansible
+#### When creating a Archlinux server
 
 Create user to use with ansible as root  
 User name should be ansible  
@@ -54,16 +54,16 @@ visudo
 ## Install ansible on my machine
 
     sudo pacman -S ansible
-	ghq get -p masasam/ansible-vps
+	ghq get -p masasam/ansible-setup-server
 
 ## Perform provisioning by ansible
 
 	ansible-playbook main.yml
 
-Write variables and passwords in group_vars/vps.yml  
-Encrypt vps.yml in advance with the following command  
+Write variables and passwords in group_vars/server.yml  
+Encrypt server.yml in advance with the following command  
 
-	ansible-vault encrypt vps.yml
+	ansible-vault encrypt server.yml
 
 If you write the location of the cryptographic password in  
 ansible.cfg, you do not have to hit the password each time  
@@ -71,7 +71,7 @@ ansible.cfg, you do not have to hit the password each time
 
 	vault_password_file = ~/Dropbox/ansible/vault_pass
 
-What is in vps.yml  
+What is in server.yml  
 
 	hostname: 'yourhost' ← Linux host name
 	domain: 'yourdomain' ← Main domain
