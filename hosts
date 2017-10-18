@@ -1,7 +1,7 @@
 [server]
 instance ansible_python_interpreter=python2
 
-[docker]
+[dockercontainer]
 docker ansible_python_interpreter=python2
 
 # [testserver]

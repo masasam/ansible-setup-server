@@ -2,7 +2,7 @@
   connection: docker
   become: yes
   vars:
-    - include: vars/server.yml
+    - include_tasks: vars/server.yml
   roles:
     - git
     - go
