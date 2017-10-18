@@ -33,14 +33,6 @@
   become: yes
   command: certbot certonly --standalone -d {{ subdomain }} --agree-tos --renew-by-default -m info@{{ domain }}
   when: not cert_file.stat.exists
-- name: create certificate adminer.{{ domain }}
-  become: yes
-  command: certbot certonly --standalone -d adminer.{{ domain }} --agree-tos --renew-by-default -m info@{{ domain }}
-  when: not cert_file.stat.exists
-- name: wget adminer
-  get_url:
-    url: "https://github.com/vrana/adminer/releases/download/v4.2.5/adminer-4.2.5.php"
-    dest: /usr/share/webapps/adminer/adminer.php
 - name: make nginx.service.d directory
   file:
     path=/etc/systemd/system/nginx.service.d
