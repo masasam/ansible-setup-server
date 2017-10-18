@@ -4,6 +4,7 @@
   vars:
     - include: vars/server.yml
   roles:
+    - git
     - nginx
     - vim
     - zsh
