@@ -1,5 +1,7 @@
 [server]
-google-conpute-engine ansible_python_interpreter=python2
+instance ansible_python_interpreter=python2
+#google-conpute-engine ansible_python_interpreter=python2
+
 [docker]
 docker ansible_python_interpreter=python2
 # [testserver]

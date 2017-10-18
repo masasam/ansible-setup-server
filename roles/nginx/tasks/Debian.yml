@@ -12,8 +12,6 @@
   file: path={{ docroot }} state=directory owner={{ username }} group={{ username }} mode=0755
 - name: blog directory
   file: path={{ docrootblog }} state=directory owner={{ username }} group={{ username }} mode=0755
-- name: adminer directory
-  file: path={{ docrootadminer }} state=directory owner=root group=root mode=0755
 - name: render nginx.conf
   template: src=templates/nginx.conf.j2 dest=/etc/nginx/nginx.conf
   notify: restart nginx
@@ -39,9 +37,6 @@
   become: yes
   command: certbot certonly --standalone -d adminer.{{ domain }} --agree-tos --renew-by-default -m info@{{ domain }}
   when: not cert_file.stat.exists
-- name: render adminer.conf
-  template: src=templates/adminer.conf.j2 dest=/etc/nginx/conf.d/adminer.conf
-  notify: restart nginx
 - name: wget adminer
   get_url:
     url: "https://github.com/vrana/adminer/releases/download/v4.2.5/adminer-4.2.5.php"
