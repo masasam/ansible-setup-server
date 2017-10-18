@@ -12,6 +12,8 @@
   file: path={{ docroot }} state=directory owner={{ username }} group={{ username }} mode=0755
 - name: blog directory
   file: path={{ docrootblog }} state=directory owner={{ username }} group={{ username }} mode=0755
+- name: ppap directory
+  file: path={{ docrootppap }} state=directory owner={{ username }} group={{ username }} mode=0755
 - name: adminer directory
   file: path={{ docrootadminer }} state=directory owner=root group=root mode=0755
 - name: render nginx.conf
