@@ -1,0 +1,10 @@
+- name: install xvfb
+  apt: name=xvfb state=present
+  when: ansible_os_family == 'Debian'
+- name: install iceweasel
+  apt: name=iceweasel state=present
+  when: ansible_os_family == 'Debian'
+- name: Download the gecko driver
+  get_url: url="https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz" dest=/tmp mode=0777
+- name: install the gecko driver
+  unarchive: src="/tmp/geckodriver-v0.19.1-linux64.tar.gz" dest=/usr/local/bin/ mode=0700 copy=no

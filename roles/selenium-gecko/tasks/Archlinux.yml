@@ -1,0 +1,9 @@
+- name: install xvfb
+  pacman: name=xorg-server-xvfb state=present
+  when: ansible_os_family == 'Archlinux'
+- name: install firefox
+  pacman: name=firefox state=present
+  when: ansible_os_family == 'Archlinux'
+- name: install the gecko driver
+  pacman: name=geckodriver state=present
+  when: ansible_os_family == 'Archlinux'
