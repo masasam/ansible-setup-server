@@ -1,0 +1,3 @@
+- name: install xvfb
+  yum: name=xorg-x11-server-Xvfb state=present
+  when: ansible_os_family == 'RedHat'

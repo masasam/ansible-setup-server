@@ -1,0 +1,3 @@
+- name: install xvfb
+  apt: name=xvfb state=present
+  when: ansible_os_family == 'Debian'

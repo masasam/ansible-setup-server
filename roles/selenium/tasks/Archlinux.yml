@@ -1,0 +1,3 @@
+- name: install xvfb
+  pacman: name=xorg-server-xvfb state=present
+  when: ansible_os_family == 'Archlinux'
