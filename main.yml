@@ -6,6 +6,7 @@
   roles:
     - git
     - nginx
+    - python
     - vim
     - zsh
     - others
