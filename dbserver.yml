@@ -1,0 +1,11 @@
+- hosts: dbserver
+  user: "{{ username }}"
+  become: yes
+  vars:
+    - include_tasks: vars/server.yml
+  roles:
+    - git
+    - vim
+    - zsh
+    - others
+    - mariadb
