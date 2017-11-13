@@ -1,0 +1,14 @@
+- hosts: server
+  user: "{{ username }}"
+  become: yes
+  vars:
+    - include_tasks: vars/server.yml
+  roles:
+    - epel
+    - git
+    - nginx
+    - python
+    - vim
+    - zsh
+    - others
+    - selenium
