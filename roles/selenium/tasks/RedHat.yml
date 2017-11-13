@@ -1,3 +1,7 @@
 - name: install xvfb
   yum: name=xorg-x11-server-Xvfb state=present
   when: ansible_os_family == 'RedHat'
+- name: Download the gecko driver
+  get_url: url="https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz" dest=/tmp mode=0777
+- name: Install the gecko driver
+  unarchive: src="/tmp/geckodriver-v0.19.1-linux64.tar.gz" dest=/usr/local/bin/ mode=0700 copy=no
