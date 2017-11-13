@@ -1,11 +1,14 @@
 [server]
 instance ansible_python_interpreter=python2
 
+[centosserver]
+centos ansible_python_interpreter=python2
+
 [dockercontainer]
 docker ansible_python_interpreter=python2
 
 [dbserver]
-archtest ansible_python_interpreter=python2
+dbhost ansible_python_interpreter=python2
 
 [testserver]
 archtest ansible_python_interpreter=python2

@@ -1,4 +1,4 @@
-- hosts: server
+- hosts: centos
   user: "{{ username }}"
   become: yes
   vars:
