@@ -1,4 +1,4 @@
-- hosts: all
+- hosts: server
   user: "{{ username }}"
   become: yes
   roles:
