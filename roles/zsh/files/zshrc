@@ -8,15 +8,15 @@ local RED=$'%{\e[31m%}'
 local GREEN=$'%{\e[32m%}'
 local YELLOW=$'%{\e[33m%}'
 local BLUE=$'%{\e[34m%}'
-local PURPLE=$'%{\e[35m%}'
+local MAGENTA=$'%{\e[35m%}'
 local CYAN=$'%{\e[36m%}'
 local WHITE=$'%{\e[37m%}'
 local DEFAULT=$'%{\e[m%}'
 who=`whoami`
-PROMPT="%(?.[%D{%m-%d %H:%M:%S} $CYAN%n$DEFAULT@$GREEN%m $BLUE%/$DEFAULT].[$RED%D{%m-%d %H:%M:%S} $RED%n$DEFAULT@$RED%m $RED%/$DEFAULT])
+PROMPT="%(?.[$YELLOW%D{%m-%d %H:%M:%S} $CYAN%n$DEFAULT@$GREEN%m $BLUE%/$DEFAULT].[$RED%D{%m-%d %H:%M:%S} $RED%n$DEFAULT@$RED%m $RED%/$DEFAULT])
 "
 if [[ $who == "root" ]]; then
-   PROMPT="%(?.[%D{%m-%d %H:%M:%S} $RED%n$DEFAULT@$GREEN%m $BLUE%/$DEFAULT].[$RED%D{%m-%d %H:%M:%S} $RED%n$DEFAULT@$RED%m $RED%/$DEFAULT])
+   PROMPT="%(?.[$YELLOW%D{%m-%d %H:%M:%S} $RED%n$DEFAULT@$GREEN%m $BLUE%/$DEFAULT].[$RED%D{%m-%d %H:%M:%S} $RED%n$DEFAULT@$RED%m $RED%/$DEFAULT])
 "
 fi
 
