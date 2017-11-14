@@ -1,3 +1,6 @@
 - name: install pip
   apt: name=python-pip state=present
   when: ansible_os_family == 'Debian'
+- name: install mycli
+  pip: name=mycli
+  when: ansible_os_family == 'Debian'
