@@ -169,6 +169,15 @@ server {
 
 server {
     listen 80;
+    server_name example.org;
+    location / {
+        root /home/jekyll;
+	index	index.html index.htm;
+    }
+}
+
+server {
+    listen 80;
     server_name www.{{ domain }};
     rewrite ^(.*) https://{{ domain }}$1 permanent;
 }
