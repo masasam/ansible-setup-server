@@ -160,17 +160,9 @@ vi /etc/pam.d/su
 
 visudo
 
-	#Defaults    requiretty(Comment out only for centos)
-
-	## User privilege specification
-	root ALL=(ALL) ALL
-	ansible ALL=(ALL) ALL
-
-	# Uncomment to allow members of group wheel to execute any command
-	%wheel ALL=(ALL) ALL
-
-	## Same thing without a password
-	%wheel ALL=(ALL) NOPASSWD: ALL
+	echo 'ansible ALL=(ALL) ALL' | sudo EDITOR='tee -a' visudo
+	echo '%wheel ALL=(ALL) ALL' | sudo EDITOR='tee -a' visudo
+	echo '%wheel ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
 
 Shutdown at
 >Ctrl-]]]
@@ -234,15 +226,9 @@ Set up a user (group) that sudo can use
 
 visudo
 
-	## User privilege specification
-	root ALL=(ALL) ALL
-	ansible ALL=(ALL) ALL
-
-	# Uncomment to allow members of group wheel to execute any command
-	%sudo ALL=(ALL) ALL
-
-	## Same thing without a password
-	%sudo ALL=(ALL) NOPASSWD: ALL
+	echo 'ansible ALL=(ALL) ALL' | sudo EDITOR='tee -a' visudo
+	echo '%wheel ALL=(ALL) ALL' | sudo EDITOR='tee -a' visudo
+	echo '%wheel ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
 
 ## When creating a test container for centos
 
@@ -298,12 +284,6 @@ visudo
 
 	#Defaults    requiretty(Confirm whether commented out)
 
-	## User privilege specification
-	root ALL=(ALL) ALL
-	ansible ALL=(ALL) ALL
-
-	# Uncomment to allow members of group wheel to execute any command
-	%wheel ALL=(ALL) ALL
-
-	## Same thing without a password
-	%wheel ALL=(ALL) NOPASSWD: ALL
+	echo 'ansible ALL=(ALL) ALL' | sudo EDITOR='tee -a' visudo
+	echo '%wheel ALL=(ALL) ALL' | sudo EDITOR='tee -a' visudo
+	echo '%wheel ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
