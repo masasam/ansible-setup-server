@@ -1,0 +1,14 @@
+- name: install less
+  yum: name=less state=present
+  when: ansible_os_family == 'RedHat'
+- name: deploy .lesskey at ansible
+  become: yes
+  become_user: "{{ username }}"
+  copy:
+    src: .lesskey
+    dest: ~/.lesskey
+- name: deploy .lesskey at root
+  become: yes
+  copy:
+    src: .lesskey
+    dest: ~/.lesskey
