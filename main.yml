@@ -4,6 +4,7 @@
   vars:
     - include_tasks: vars/server.yml
   roles:
+    - emacs
     - git
     - nginx
     - python

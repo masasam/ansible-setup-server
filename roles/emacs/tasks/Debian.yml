@@ -1,0 +1,14 @@
+- name: install emacs-nox
+  apt: name=emacs25-nox state=present
+  when: ansible_os_family == 'Debian'
+- name: deploy .emacs.el at ansible
+  become: yes
+  become_user: "{{ username }}"
+  copy:
+    src: .emacs.el
+    dest: ~/.emacs.el
+- name: deploy .emacs.el at root
+  become: yes
+  copy:
+    src: .emacs.el
+    dest: ~/.emacs.el
