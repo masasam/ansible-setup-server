@@ -16,6 +16,8 @@
   file: path={{ docrootppap }} state=directory owner={{ username }} group={{ username }} mode=0755
 - name: jekyll directory
   file: path={{ docrootjekyll }} state=directory owner={{ username }} group={{ username }} mode=0755
+- name: jekyll2 directory
+  file: path={{ docrootjekyll2 }} state=directory owner={{ username }} group={{ username }} mode=0755
 - name: render nginx.conf
   template: src=templates/nginx.conf.j2 dest=/etc/nginx/nginx.conf
   notify: restart nginx
