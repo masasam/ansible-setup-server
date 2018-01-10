@@ -4,11 +4,12 @@
 - name: deploy .emacs.el at ansible
   become: yes
   become_user: "{{ username }}"
-  copy:
-    src: .emacs.el
+  get_url:
+    url: https://raw.githubusercontent.com/masasam/dotfiles/90c9b86e2856564856275c51d33f958ce5db504e/.emacs.d/server.el
     dest: ~/.emacs.el
+    
 - name: deploy .emacs.el at root
   become: yes
-  copy:
-    src: .emacs.el
+  get_url:
+    url: https://raw.githubusercontent.com/masasam/dotfiles/90c9b86e2856564856275c51d33f958ce5db504e/.emacs.d/server.el
     dest: ~/.emacs.el
