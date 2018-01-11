@@ -1,11 +1,15 @@
-# postfix と dovecot で virtualmailuser
+# virtualmailuser with postfix and dovecot
 
-arch linux postfix パッケージは既に SASL のサポートを有効にしてコンパイルされているので、SASL 認証を使う場合、2 つの選択肢があります  
-cyrus-sasl パッケージを使う。  
-Dovecot を有効にして (Dovecot の認証だけでなく) Postfix の認証を処理させる。  
+arch linux Since the postfix package has already been compiled with SASL support enabled,
 
-今回は cyrus-sasl なしのパターンで構築する  
-STARTTLS POP3S で構築する  
+there are two choices when using SASL authentication.
+
+1.Use the cyrus-sasl package.
+
+2.Enable Dovecot to handle Postfix authentication.
+
+Construct with a pattern without cyrus-sasl this time
+Build with STARTTLS POP3S
 
 ## postfix
 
@@ -32,7 +36,7 @@ vim /etc/postfix/main.cf
 
 	inet_protocols = all
 
-shell に戻って  
+Return to shell
 
     groupadd -g 5000 vmail
     useradd -u 5000 -g vmail -s /usr/bin/nologin -d /home/vmail -m vmail
@@ -86,7 +90,7 @@ vim /etc/dovecot/conf.d/10-auth.conf
     auth_mechanisms = cram-md5 plain
     !include auth-passwdfile.conf.ext
     !include auth-static.conf.ext
-    これ以外コメントアウト
+	**Other comments out
 
 vim /etc/dovecot/conf.d/auth-passwdfile.conf.ext  
 
@@ -98,7 +102,7 @@ vim /etc/dovecot/conf.d/auth-passwdfile.conf.ext
         driver = passwd-file
         args = username_format=%u /etc/dovecot/passwd
     }
-    これ以外コメントアウト
+    **Other comments out
 
 vim /etc/dovecot/conf.d/auth-static.conf.ext  
 
@@ -112,7 +116,7 @@ Enter new password:
 Retype new password:
 {CRAM-MD5}913331d8782236a8ecba7764a63aa27b26437fd40ca878d887f11d81245c2c6b
 
-vim /etc/dovecot/passwd にユーザーとパスワードを書き込み  
+Write user and password to /etc/dovecot/passwd
 
     info@pansymade.net:{CRAM-MD5}913331d8782236a8ecba7764a63aa27b26437fd40ca878d887f11d81245c2c6b
     改行を忘れないように
@@ -126,7 +130,8 @@ vim /etc/dovecot/conf.d/10-ssl.conf
     root: masamasa@mailchodai.com
     newaliases
 
-vim /etc/dovecot/dovecot.conf に追加  
+vim /etc/dovecot/dovecot.conf
+Add below
 
     service auth {
       unix_listener /var/spool/postfix/private/auth {
