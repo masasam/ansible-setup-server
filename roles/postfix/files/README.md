@@ -90,7 +90,7 @@ vim /etc/dovecot/conf.d/10-auth.conf
     auth_mechanisms = cram-md5 plain
     !include auth-passwdfile.conf.ext
     !include auth-static.conf.ext
-	**Other comments out
+	*Other comments out*
 
 vim /etc/dovecot/conf.d/auth-passwdfile.conf.ext  
 
@@ -102,7 +102,7 @@ vim /etc/dovecot/conf.d/auth-passwdfile.conf.ext
         driver = passwd-file
         args = username_format=%u /etc/dovecot/passwd
     }
-    **Other comments out
+    *Other comments out*
 
 vim /etc/dovecot/conf.d/auth-static.conf.ext  
 
@@ -119,7 +119,7 @@ Retype new password:
 Write user and password to /etc/dovecot/passwd
 
     info@pansymade.net:{CRAM-MD5}913331d8782236a8ecba7764a63aa27b26437fd40ca878d887f11d81245c2c6b
-    改行を忘れないように
+    *Do not forget a line break*
 
 vim /etc/dovecot/conf.d/10-ssl.conf  
 
