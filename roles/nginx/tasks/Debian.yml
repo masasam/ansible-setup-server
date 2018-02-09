@@ -18,6 +18,8 @@
   file: path={{ docrootjekyll }} state=directory owner={{ username }} group={{ username }} mode=0755
 - name: jekyll2 directory
   file: path={{ docrootjekyll2 }} state=directory owner={{ username }} group={{ username }} mode=0755
+- name: lisp directory
+  file: path={{ docrootlisp }} state=directory owner={{ username }} group={{ username }} mode=0755
 - name: render nginx.conf
   template: src=templates/nginx.conf.j2 dest=/etc/nginx/nginx.conf
   notify: restart nginx
@@ -26,6 +28,12 @@
   when: ansible_os_family == 'Debian'
 - name: check cert
   stat: path=/etc/letsencrypt/live/{{ domain }}/cert.pem
+  register: cert_file
+- name: check cert
+  stat: path=/etc/letsencrypt/live/{{ subdomain }}/cert.pem
+  register: cert_file
+- name: check cert
+  stat: path=/etc/letsencrypt/live/{{ mydomain }}/cert.pem
   register: cert_file
 - name: nginx stop
   become: yes
@@ -38,6 +46,10 @@
 - name: create certificate {{ subdomain }}
   become: yes
   command: certbot certonly --standalone -d {{ subdomain }} --agree-tos --renew-by-default -m info@{{ domain }}
+  when: not cert_file.stat.exists
+- name: create certificate {{ mydomain }}
+  become: yes
+  command: certbot certonly --standalone -d {{ mydomain }} --agree-tos --renew-by-default -m info@{{ domain }}
   when: not cert_file.stat.exists
 - name: make nginx.service.d directory
   file:
