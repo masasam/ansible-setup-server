@@ -72,14 +72,17 @@ What is in server.yml
 	username: 'ansible' ← User name ansible ssh
 	mailroot: 'youremailaddress' ← E-mail address to transfer root's mail
 	monitalert: 'youremailaddress' ← Destination of alert mail from monit
-	infopassword: '913336a8ecba7764cd81245c2c6b'
+	infopassword: '1e3396a8ecbc77a4cd81145c2c6b'
 	mariadbrootpassword: 'mariadbrootpassword' ← The password of the mariadb root user
 	mackerelapikey: 'yourmackerelapikey' ← mackerel's apikey
 	dbname: 'yourdbbame' ← DB name used in mariadb
 	dbpassword: 'yourdbpassword' ← That password
 	docroot: '/home/html' ← Main document route for nginx
 	docrootblog: '/home/blog' ← Document root of blog for nginx
-	docrootadminer: '/usr/share/webapps/adminer' ← Adminer's document root for nginx
+	docrootppap: '/home/ppap'
+	docrootjekyll: '/home/jekyll'
+	docrootjekyll2: '/home/jekyll2'
+	docrootlisp: '/home/lisp'
 
 Infopassword will be the password for the email address of info@yourdomain
 How to make infopassword
