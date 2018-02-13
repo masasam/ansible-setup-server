@@ -64,11 +64,12 @@ ansible.cfg, you do not have to hit the password each time
 
 	vault_password_file = ~/Dropbox/ansible/vault_pass
 
-What is in server.yml
+What is in group_vars/server.yml (Write a password etc. here)
 
 	hostname: 'yourhost' ← Linux host name
 	domain: 'yourdomain' ← Main domain
 	subdomain: 'subdomain.yourdomain' ← sub domain(using blog)
+	mydomain: 'mydomain.yourdomain' ← sub domain(using lisp)
 	username: 'ansible' ← User name ansible ssh
 	mailroot: 'youremailaddress' ← E-mail address to transfer root's mail
 	monitalert: 'youremailaddress' ← Destination of alert mail from monit
