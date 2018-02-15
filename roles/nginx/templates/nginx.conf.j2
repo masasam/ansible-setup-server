@@ -163,7 +163,7 @@ server {
     server_name {{ mydomain }};
     return  301 https://{{ mydomain }}$request_uri;
     location / {
-        root /home/lisp;
+        root {{ docrootlisp }};
 	index	index.html index.htm;
     }
 }
@@ -175,7 +175,7 @@ server {
     ssl_certificate_key  /etc/letsencrypt/live/{{ mydomain }}/privkey.pem;
 
     location / {
-        root    /home/lisp;
+        root    {{ docrootlisp }};
         index   index.html index.htm;
     }
 }
