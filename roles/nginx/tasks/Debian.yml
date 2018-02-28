@@ -20,6 +20,8 @@
   file: path={{ docrootjekyll2 }} state=directory owner={{ username }} group={{ username }} mode=0755
 - name: lisp directory
   file: path={{ docrootlisp }} state=directory owner={{ username }} group={{ username }} mode=0755
+- name: lisp2 directory
+  file: path={{ docrootlisp2 }} state=directory owner={{ username }} group={{ username }} mode=0755
 - name: render nginx.conf
   template: src=templates/nginx.conf.j2 dest=/etc/nginx/nginx.conf
   notify: restart nginx
@@ -41,15 +43,19 @@
   when: not cert_file.stat.exists
 - name: create certificate {{ domain }}
   become: yes
-  command: certbot certonly --standalone -d {{ domain }} --agree-tos --renew-by-default -m info@{{ domain }}
+  command: certbot certonly --standalone -d {{ domain }} --agree-tos --renew-by-default -m {{ certbotmail }}
   when: not cert_file.stat.exists
 - name: create certificate {{ subdomain }}
   become: yes
-  command: certbot certonly --standalone -d {{ subdomain }} --agree-tos --renew-by-default -m info@{{ domain }}
+  command: certbot certonly --standalone -d {{ subdomain }} --agree-tos --renew-by-default -m {{ certbotmail }}
   when: not cert_file.stat.exists
 - name: create certificate {{ mydomain }}
   become: yes
-  command: certbot certonly --standalone -d {{ mydomain }} --agree-tos --renew-by-default -m info@{{ domain }}
+  command: certbot certonly --standalone -d {{ mydomain }} --agree-tos --renew-by-default -m {{ certbotmail }}
+  when: not cert_file.stat.exists
+- name: create certificate {{ mydomain2 }}
+  become: yes
+  command: certbot certonly --standalone -d {{ mydomain2 }} --agree-tos --renew-by-default -m {{ certbotmail }}
   when: not cert_file.stat.exists
 - name: make nginx.service.d directory
   file:

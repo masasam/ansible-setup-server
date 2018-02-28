@@ -183,6 +183,29 @@ server {
 
 server {
     listen 80;
+    server_name {{ mydomain2 }};
+    return  301 https://{{ mydomain2 }}$request_uri;
+    location / {
+        root {{ docrootlisp2 }};
+	index	index.html index.htm;
+    }
+}
+server {
+    listen 443 ssl http2;
+    server_name {{ mydomain2 }};
+    ssl on;
+    ssl_certificate      /etc/letsencrypt/live/{{ mydomain2 }}/fullchain.pem;
+    ssl_certificate_key  /etc/letsencrypt/live/{{ mydomain2 }}/privkey.pem;
+
+    location / {
+        root    {{ docrootlisp2 }};
+        index   index.html index.htm;
+    }
+}
+
+
+server {
+    listen 80;
     server_name example.com;
     location / {
         root /home/ppap;
