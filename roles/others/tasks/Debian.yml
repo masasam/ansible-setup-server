@@ -1,5 +1,5 @@
 - name: install others
-  apt: name={{ item }} state=installed
+  apt: name={{ item }} state=present
   when: ansible_os_family == 'Debian'
   with_items:
     - bash-completion
