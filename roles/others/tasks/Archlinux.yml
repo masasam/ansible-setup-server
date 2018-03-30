@@ -1,5 +1,5 @@
 - name: install others
-  pacman: name={{ item }} state=installed
+  pacman: name={{ item }} state=present
   when: ansible_os_family == 'Archlinux'
   with_items:
     - bash-completion

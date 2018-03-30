@@ -1,5 +1,5 @@
 - name: install others
-  yum: name={{ item }} state=installed
+  yum: name={{ item }} state=present
   when: ansible_os_family == 'Redhat'
   with_items:
     - bash-completion
