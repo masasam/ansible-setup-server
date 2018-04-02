@@ -205,7 +205,7 @@ Login to container with ssh
 
 	ssh archtest
 
-## When creating a debian test container
+## When creating a debian test container at localhost
 
 	sudo pacman debootstrap
 	yaourt -S debian-archive-keyring
@@ -253,7 +253,7 @@ visudo
 	echo '%wheel ALL=(ALL) ALL' | sudo EDITOR='tee -a' visudo
 	echo '%wheel ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
 
-## When creating a test container for centos
+## When creating a test container for centos at localhost
 
 	yaourt yum
 	mkdir centos
