@@ -5,7 +5,7 @@ Target OS at the server
 - Centos7
 - Archlinux
 
-Perhaps no one will use archlinux on the server(-_-;)
+Perhaps no one will use archlinux at the server(-_-;)
 
 ## Synopsis
 
