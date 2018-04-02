@@ -1,6 +1,6 @@
 ## Preparing the server you want to provision with ansible
 
-Target OS
+Target OS at the server
 - Debian9 stretch
 - Centos7
 - Archlinux
