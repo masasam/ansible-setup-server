@@ -60,3 +60,9 @@ zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 # screen title
 echo -ne "\033k${HOST}\033\\"
+
+export RBENV_ROOT="${HOME}/.rbenv"
+if [ -d "${RBENV_ROOT}" ]; then
+  export PATH="${RBENV_ROOT}/bin:${PATH}"
+  eval "$(rbenv init -)"
+fi
