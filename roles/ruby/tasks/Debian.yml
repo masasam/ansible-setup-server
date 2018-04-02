@@ -33,10 +33,13 @@
   when: ansible_os_family == 'Debian'
 - name: install libgdbm-dev
   apt: name=libgdbm-dev
-  when: ansible_os_family == 'Debian'
+  when: ansible_os_family == 'Debian'  
 - name: check ruby-build
   stat: path={{ rubyhome }}/.rbenv/plugins
   register: ruby_file
+- name: install rbenv
+  command: git clone https://github.com/sstephenson/rbenv.git {{ rubyhome }}/.rbenv
+  when: not ruby_file.stat.exists
 - name: create ruby-build directory
   file: path={{ rubyhome }}/.rbenv/plugins state=directory owner={{ username }} group={{ username }} mode=0755
   when: not ruby_file.stat.exists

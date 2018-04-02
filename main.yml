@@ -7,10 +7,10 @@
     - emacs
     - git
     - nginx
-    - ruby
     - python
     - vim
     - zsh
+    - ruby
     - less
     - others
     - selenium
