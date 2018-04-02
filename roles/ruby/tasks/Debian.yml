@@ -46,13 +46,3 @@
 - name: install ruby-build
   command: git clone https://github.com/rbenv/ruby-build.git {{ rubyhome }}/.rbenv/plugins/ruby-build
   when: not ruby_file.stat.exists
-- name: install ruby 2.5.1
-  become: yes
-  become_user: "{{ username }}"
-  command: rbenv install 2.5.1
-  when: not ruby_file.stat.exists
-- name: install bundle
-  become: yes
-  become_user: "{{ username }}"
-  command: gem install bundle
-  when: not ruby_file.stat.exists
