@@ -187,7 +187,7 @@ Run playbook
 
 	ansible-playbook main.yml
 
-## When creating a test container for centos at localhost
+## When creating a centos test container at localhost
 
 	yaourt yum
 	mkdir centos
