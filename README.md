@@ -53,7 +53,7 @@ Return to root
 	systemctl enable ssh
 	systemctl start ssh
 
-Set host name on your machine.
+Set host name on your laptop or desktop
 
 	hostname debian
 
@@ -63,7 +63,7 @@ visudo
 	echo '%wheel ALL=(ALL) ALL' | sudo EDITOR='tee -a' visudo
 	echo '%wheel ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
 
-## Install ansible on my machine
+## Install ansible on your laptop or desktop
 
 	pip install --user ansible
 	git clone https://github.com/masasam/ansible-setup-server.git
