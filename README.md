@@ -15,6 +15,24 @@ Update package inside server
 
 	ansible-playbook update.yml
 
+Write directory names exist under roles you want to use at main.yml
+
+	- hosts: server
+		user: "{{ username }}"
+		become: yes
+		vars:
+	   	- include_tasks: vars/server.yml
+	   roles:
+	    - emacs
+		- git
+		- nginx
+		- python
+		- vim
+		- zsh
+		- less
+		- others
+		- selenium
+
 That is all.
 
 #### When creating a Debian server
