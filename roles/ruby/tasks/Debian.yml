@@ -1,5 +1,38 @@
-- name: install rbenv
-  apt: name=rbenv
+- name: install gcc-6
+  apt: name=gcc-6
+  when: ansible_os_family == 'Debian'
+- name: install autoconf
+  apt: name=autoconf
+  when: ansible_os_family == 'Debian'
+- name: install bison
+  apt: name=bison
+  when: ansible_os_family == 'Debian'
+- name: install build-essential
+  apt: name=build-essential
+  when: ansible_os_family == 'Debian'
+- name: install libssl-dev
+  apt: name=libssl-dev
+  when: ansible_os_family == 'Debian'
+- name: install libyaml-dev
+  apt: name=libyaml-dev
+  when: ansible_os_family == 'Debian'
+- name: install libreadline6-dev
+  apt: name=libreadline6-dev
+  when: ansible_os_family == 'Debian'
+- name: install zlib1g-dev
+  apt: name=zlib1g-dev
+  when: ansible_os_family == 'Debian'
+- name: install libncurses5-dev
+  apt: name=libncurses5-dev
+  when: ansible_os_family == 'Debian'
+- name: install libffi-dev
+  apt: name=libffi-dev
+  when: ansible_os_family == 'Debian'
+- name: install libgdbm3
+  apt: name=libgdbm3
+  when: ansible_os_family == 'Debian'
+- name: install libgdbm-dev
+  apt: name=libgdbm-dev
   when: ansible_os_family == 'Debian'
 - name: check ruby-build
   stat: path={{ rubyhome }}/.rbenv/plugins
@@ -9,4 +42,14 @@
   when: not ruby_file.stat.exists
 - name: install ruby-build
   command: git clone https://github.com/rbenv/ruby-build.git {{ rubyhome }}/.rbenv/plugins/ruby-build
+  when: not ruby_file.stat.exists
+- name: install ruby 2.5.1
+  become: yes
+  become_user: "{{ username }}"
+  command: rbenv install 2.5.1
+  when: not ruby_file.stat.exists
+- name: install bundle
+  become: yes
+  become_user: "{{ username }}"
+  command: gem install bundle
   when: not ruby_file.stat.exists
