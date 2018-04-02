@@ -47,8 +47,8 @@ visudo
 
 ## Install ansible on my machine
 
-	sudo pacman -S ansible
-	ghq get -p masasam/ansible-setup-server
+	pip install --user ansible
+	git clone https://github.com/masasam/ansible-setup-server.git
 
 ## Perform provisioning by ansible
 
