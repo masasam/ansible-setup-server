@@ -11,11 +11,11 @@ Perhaps no one will use archlinux at the server(-_-;)
 
 Create a server from scratch
 
-	ansible-playbook main.yml
+	ansible-playbook --ask-vault-pass main.yml
 
 Update package inside server
 
-	ansible-playbook update.yml
+	ansible-playbook --ask-vault-pass update.yml
 
 Write directory names exist under roles you want to use at main.yml
 
@@ -72,18 +72,12 @@ visudo
 
 ## Perform provisioning by ansible
 
-	ansible-playbook main.yml
+	ansible-playbook --ask-vault-pass main.yml
 
 Write variables and passwords in group_vars/server.yml
 Encrypt server.yml in advance with the following command
 
 	ansible-vault encrypt group_vars/server.yml
-
-If you write the location of the cryptographic password in
-ansible.cfg, you do not have to hit the password each time
-(The contents are only the password)
-
-	vault_password_file = ~/Dropbox/ansible/vault_pass
 
 What is in group_vars/server.yml (Write a password etc. here)
 
@@ -123,7 +117,7 @@ Because it is
 
 #### Update the server only playbook
 
-	ansible-playbook update.yml
+	ansible-playbook --ask-vault-pass update.yml
 
 ## When creating a Debian test container at localhost
 
@@ -185,7 +179,7 @@ Write at main.yml
 
 Run playbook
 
-	ansible-playbook main.yml
+	ansible-playbook --ask-vault-pass main.yml
 
 ## When creating a centos test container at localhost
 
@@ -257,4 +251,4 @@ Write at main.yml
 
 Run playbook
 
-	ansible-playbook main.yml
+	ansible-playbook --ask-vault-pass main.yml
