@@ -77,7 +77,7 @@ visudo
 Write variables and passwords in group_vars/server.yml
 Encrypt server.yml in advance with the following command
 
-	ansible-vault encrypt server.yml
+	ansible-vault encrypt group_vars/server.yml
 
 If you write the location of the cryptographic password in
 ansible.cfg, you do not have to hit the password each time
