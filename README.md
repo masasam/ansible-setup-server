@@ -5,14 +5,24 @@ Target OS
 - Debian9 stretch
 - Centos7
 
-#### When creating a Archlinux server
+## Synopsis
+
+Create a server from scratch
+
+	ansible-playbook main.yml
+
+Update package inside server
+
+	ansible-playbook update.yml
+
+That is all.
+
+#### When creating a Debian server
 
 Create user to use with ansible as root
 
-User name should be ansible
-
-	pacman -S curl zsh openssh
-	useradd -m -G wheel -s /bin/zsh ansible
+	apt-get install python openssh-server zsh bash-completion sudo
+	useradd -m -G sudo -s /bin/zsh ansible
 	su - ansible
 	ssh-keygen -t rsa -b 4096
 	cd .ssh/
@@ -22,21 +32,12 @@ User name should be ansible
 
 Return to root
 
-	systemctl enable sshd
-	systemctl start sshd
+	systemctl enable ssh
+	systemctl start ssh
 
-Set host name
+Set host name on your machine.
 
-	hostname archlinux
-
-vi /etc/hosts
-
-	127.0.0.1   localhost.localdomain   localhost archlinux
-
-vi /etc/pam.d/su
-
-	# Remove comment out
-	auth required pam_wheel.so use_uid
+	hostname debian
 
 visudo
 
