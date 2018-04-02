@@ -55,7 +55,7 @@ Return to root
 	systemctl enable ssh
 	systemctl start ssh
 
-Set host name on your laptop or desktop
+Set host name
 
 	hostname debian
 
