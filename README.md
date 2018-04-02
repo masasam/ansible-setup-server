@@ -123,89 +123,7 @@ Because it is
 
 	ansible-playbook update.yml
 
-## Make a test guest container locally
-
----- If a test environment is unnecessary, you do not need the following ----
-
-The guest environment is vps of the production environment In the
-guest test environment systemd-nspawn
-In the following, systemd-nspawn is constructed by reading with ssh in vps
-
-Preparing a test container
-
-	sudo pacman -S arch-install-scripts
-	mkdir systemdcontainer
-	sudo pacstrap -i -c -d ~/systemdcontainer base base-devel --ignore linux
-	sudo systemd-nspawn -b -D ~/systemdcontainer --bind=/var/cache/pacman/pkg
-
-In the container
-
-	pacman -Sy bash-completion openssh
-
-Arch linux is the default for python 3 Make ansible use python 2
-It seems that centos8 also becomes python 3, so be careful
-
-	pacman -Sy python2 zsh
-
-Create user to use with ansible
-
-	useradd -m -G wheel -s /bin/zsh ansible
-	su - ansible
-	ssh-keygen -t rsa -b 4096
-	cd .ssh/
-	mv id_rsa.pub authorized_keys
-	chmod 600 authorized_keys
-	curl https://github.com/masasam.keys >> ~/.ssh/authorized_keys ← Register public key registered with github
-
-Return to root
-
-	systemctl enable sshd
-	systemctl start sshd
-
-Set host name
-
-	hostname archtest
-
-vi /etc/hosts
-
-	127.0.0.1   localhost.localdomain   localhost archtest
-
-#### Make the user who can become root only users belonging to the wheel group
-
-	usermod -G wheel ansible
-
-vi /etc/pam.d/su
-
-	# Remove comment out
-	auth required pam_wheel.so use_uid
-
-#### Set up a user (group) that sudo can use
-
-visudo
-
-	echo 'ansible ALL=(ALL) ALL' | sudo EDITOR='tee -a' visudo
-	echo '%wheel ALL=(ALL) ALL' | sudo EDITOR='tee -a' visudo
-	echo '%wheel ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
-
-Shutdown at
->Ctrl-]]]
-
-Since it became possible to connect with ssh, you can start it in the background from next time onwards.
-(Now that you can log in with ssh and shut it down)
-
-	sudo systemd-nspawn -b -D ~/systemdcontainer --bind=/var/cache/pacman/pkg &
-
-Set the following in .ssh/config
-
-	Host archtest
-						HostName localhost
-						User ansible
-
-Login to container with ssh
-
-	ssh archtest
-
-## When creating a debian test container at localhost
+## When creating a Debian test container at localhost
 
 	sudo pacman debootstrap
 	yaourt -S debian-archive-keyring
@@ -252,6 +170,20 @@ visudo
 	echo 'ansible ALL=(ALL) ALL' | sudo EDITOR='tee -a' visudo
 	echo '%wheel ALL=(ALL) ALL' | sudo EDITOR='tee -a' visudo
 	echo '%wheel ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
+
+Set the following in .ssh/config on your laptop or desktop
+
+	Host debiantest
+						HostName localhost
+						User ansible
+
+Write at main.yml
+
+	- hosts: debiantest
+
+Run playbook
+
+	ansible-playbook main.yml
 
 ## When creating a test container for centos at localhost
 
@@ -310,3 +242,17 @@ visudo
 	echo 'ansible ALL=(ALL) ALL' | sudo EDITOR='tee -a' visudo
 	echo '%wheel ALL=(ALL) ALL' | sudo EDITOR='tee -a' visudo
 	echo '%wheel ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
+
+Set the following in .ssh/config on your laptop or desktop
+
+	Host centostest
+						HostName localhost
+						User ansible
+
+Write at main.yml
+
+	- hosts: centostest
+
+Run playbook
+
+	ansible-playbook main.yml
