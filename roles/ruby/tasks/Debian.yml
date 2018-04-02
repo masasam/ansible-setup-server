@@ -1,0 +1,12 @@
+- name: install rbenv
+  apt: name=rbenv
+  when: ansible_os_family == 'Debian'
+- name: check ruby-build
+  stat: path={{ rubyhome }}/.rbenv/plugins
+  register: ruby_file
+- name: create ruby-build directory
+  file: path={{ rubyhome }}/.rbenv/plugins state=directory owner={{ username }} group={{ username }} mode=0755
+  when: not ruby_file.stat.exists
+- name: install ruby-build
+  command: git clone https://github.com/rbenv/ruby-build.git {{ rubyhome }}/.rbenv/plugins/ruby-build
+  when: not ruby_file.stat.exists
