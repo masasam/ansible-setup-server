@@ -35,14 +35,22 @@
   apt: name=libgdbm-dev
   when: ansible_os_family == 'Debian'  
 - name: check ruby-build
+  become: yes
+  become_user: "{{ username }}"
   stat: path={{ rubyhome }}/.rbenv/plugins
   register: ruby_file
 - name: install rbenv
+  become: yes
+  become_user: "{{ username }}"
   command: git clone https://github.com/sstephenson/rbenv.git {{ rubyhome }}/.rbenv
   when: not ruby_file.stat.exists
 - name: create ruby-build directory
+  become: yes
+  become_user: "{{ username }}"
   file: path={{ rubyhome }}/.rbenv/plugins state=directory owner={{ username }} group={{ username }} mode=0755
   when: not ruby_file.stat.exists
 - name: install ruby-build
+  become: yes
+  become_user: "{{ username }}"
   command: git clone https://github.com/rbenv/ruby-build.git {{ rubyhome }}/.rbenv/plugins/ruby-build
   when: not ruby_file.stat.exists
