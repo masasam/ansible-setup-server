@@ -22,6 +22,8 @@
   file: path={{ docrootlisp }} state=directory owner={{ username }} group={{ username }} mode=0755
 - name: lisp2 directory
   file: path={{ docrootlisp2 }} state=directory owner={{ username }} group={{ username }} mode=0755
+- name: lisp3 directory
+  file: path={{ docrootlisp3 }} state=directory owner={{ username }} group={{ username }} mode=0755
 - name: render nginx.conf
   template: src=templates/nginx.conf.j2 dest=/etc/nginx/nginx.conf
   notify: restart nginx
@@ -56,6 +58,10 @@
 - name: create certificate {{ mydomain2 }}
   become: yes
   command: certbot certonly --standalone -d {{ mydomain2 }} --agree-tos --renew-by-default -m {{ certbotmail }}
+  when: not cert_file.stat.exists
+- name: create certificate {{ mydomain3 }}
+  become: yes
+  command: certbot certonly --standalone -d {{ mydomain3 }} --agree-tos --renew-by-default -m {{ certbotmail }}
   when: not cert_file.stat.exists
 - name: make nginx.service.d directory
   file:
