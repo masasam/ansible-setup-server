@@ -260,6 +260,12 @@ server {
     rewrite ^(.*) https://{{ domain }}$1 permanent;
 }
 
+server {
+    listen 80;
+    server_name www.{{ mydomain3 }};
+    rewrite ^(.*) https://{{ mydomain3 }}$1 permanent;
+}
+
 include /etc/nginx/conf.d/*.conf;
 }
 
