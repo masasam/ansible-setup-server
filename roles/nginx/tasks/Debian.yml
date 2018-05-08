@@ -24,6 +24,8 @@
   file: path={{ docrootlisp2 }} state=directory owner={{ username }} group={{ username }} mode=0755
 - name: lisp3 directory
   file: path={{ docrootlisp3 }} state=directory owner={{ username }} group={{ username }} mode=0755
+- name: alias directory
+  file: path={{ docrootalias }} state=directory owner={{ username }} group={{ username }} mode=0755
 - name: render nginx.conf
   template: src=templates/nginx.conf.j2 dest=/etc/nginx/nginx.conf
   notify: restart nginx
