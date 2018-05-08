@@ -224,6 +224,11 @@ server {
         root    {{ docrootlisp3 }};
         index   index.html index.htm;
     }
+
+    location /blog {
+        alias    {{ docrootalias }};
+        index   index.html index.htm;
+    }
 }
 
 
