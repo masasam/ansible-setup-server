@@ -29,7 +29,11 @@ http {
     #keepalive_timeout  0;
     keepalive_timeout  65;
 
-    #gzip  on;
+    gzip            on;
+    gzip_min_length 1000;
+    gzip_proxied    expired no-cache no-store private auth;
+    gzip_types text/css application/javascript application/json application/font-woff application/font-tff application/octet-stream;
+
 
     server {
         listen       80;
