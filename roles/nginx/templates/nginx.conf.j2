@@ -151,6 +151,9 @@ server {
 server {
     listen 443 ssl http2;
     server_name {{ subdomain }};
+
+    rewrite ^/2018/03/24/mycliが便利/$ https://{{ mydomain3 }}/blog/posts/mycli/ permanent;
+    
     ssl on;
     ssl_certificate      /etc/letsencrypt/live/{{ subdomain }}/fullchain.pem;
     ssl_certificate_key  /etc/letsencrypt/live/{{ subdomain }}/privkey.pem;
