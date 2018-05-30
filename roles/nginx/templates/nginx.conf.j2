@@ -153,6 +153,8 @@ server {
     server_name {{ subdomain }};
 
     rewrite ^/2018/03/24/mycliが便利/$ https://{{ mydomain3 }}/blog/posts/mycli/ permanent;
+    rewrite ^/2017/03/08/ansible\ の\ handlers\ で複数の処理がしたい/$ https://{{ mydomain3 }}/blog/posts/ansible-handlers/ permanent;
+    rewrite ^/2017/02/11/ansible\ を快適にするコマンドを作る/$ https://{{ mydomain3 }}/blog/posts/ansible/ permanent;
     
     ssl on;
     ssl_certificate      /etc/letsencrypt/live/{{ subdomain }}/fullchain.pem;
