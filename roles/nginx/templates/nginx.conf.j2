@@ -153,7 +153,7 @@ server {
     server_name {{ subdomain }};
 
     rewrite ^/2018/03/24/mycliが便利/$ https://{{ mydomain3 }}/blog/posts/mycli/ permanent;
-    rewrite ^/2017/03/08/ansible\ の\ handlers\ で複数の処理がしたい/$ https://{{ mydomain3 }}/blog/posts/ansible-handlers/ permanent;
+    rewrite ^/2017/03/08/ansible-の-handlers-で複数の処理がしたい/$ https://{{ mydomain3 }}/blog/posts/ansible-handlers/ permanent;
     rewrite ^/2017/02/11/ansible-を快適にするコマンドを作る/$ https://{{ mydomain3 }}/blog/posts/ansible/ permanent;
     rewrite ^/2017/02/09/systemd-nspawn-で-centos-と-debian-コンテナを作る/$ https://{{ mydomain3 }}/blog/posts/systemd-nspawn-centos-debian/ permanent;
     rewrite ^/2017/01/24/github-のリポジトリを作って作業をはじめるコマンド/$ https://{{ mydomain3 }}/blog/posts/github/ permanent;
@@ -163,6 +163,7 @@ server {
     rewrite ^/2016/11/09/これだけ覚えておけばいい-arch-linux-のパッケージ管理/$ https://{{ mydomain3 }}/blog/posts/pacman/ permanent;
     rewrite ^/2016/09/21/emacs25.1-の-tramp-が快適/$ https://{{ mydomain3 }}/blog/posts/tramp/ permanent;
     rewrite ^/2016/11/07/linux-で新しいことをやる意欲を削がないために必要なこと/$ https://{{ mydomain3 }}/blog/posts/linux/ permanent;
+    rewrite ^/$ https://{{ mydomain3 }}/blog/ permanent;
     
     ssl on;
     ssl_certificate      /etc/letsencrypt/live/{{ subdomain }}/fullchain.pem;
