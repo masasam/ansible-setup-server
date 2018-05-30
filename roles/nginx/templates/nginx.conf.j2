@@ -163,7 +163,7 @@ server {
     rewrite ^/2016/11/09/これだけ覚えておけばいい-arch-linux-のパッケージ管理/$ https://{{ mydomain3 }}/blog/posts/pacman/ permanent;
     rewrite ^/2016/09/21/emacs25.1-の-tramp-が快適/$ https://{{ mydomain3 }}/blog/posts/tramp/ permanent;
     rewrite ^/2016/11/07/linux-で新しいことをやる意欲を削がないために必要なこと/$ https://{{ mydomain3 }}/blog/posts/linux/ permanent;
-    rewrite ^/$ https://{{ mydomain3 }}/blog/ permanent;
+    rewrite ^(.*)$ https://{{ mydomain3 }}/blog/ permanent;
     
     ssl on;
     ssl_certificate      /etc/letsencrypt/live/{{ subdomain }}/fullchain.pem;
