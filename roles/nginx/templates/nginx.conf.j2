@@ -191,6 +191,7 @@ server {
     ssl on;
     ssl_certificate      /etc/letsencrypt/live/{{ mydomain }}/fullchain.pem;
     ssl_certificate_key  /etc/letsencrypt/live/{{ mydomain }}/privkey.pem;
+    error_page  404              /404.html;
 
     location / {
         root    {{ docrootlisp }};
@@ -214,6 +215,7 @@ server {
     ssl on;
     ssl_certificate      /etc/letsencrypt/live/{{ mydomain2 }}/fullchain.pem;
     ssl_certificate_key  /etc/letsencrypt/live/{{ mydomain2 }}/privkey.pem;
+    error_page  404              /404.html;
 
     location / {
         root    {{ docrootlisp2 }};
@@ -237,6 +239,7 @@ server {
     ssl on;
     ssl_certificate      /etc/letsencrypt/live/{{ mydomain3 }}/fullchain.pem;
     ssl_certificate_key  /etc/letsencrypt/live/{{ mydomain3 }}/privkey.pem;
+    error_page  404              /404.html;
 
     location / {
         root    {{ docrootlisp3 }};
