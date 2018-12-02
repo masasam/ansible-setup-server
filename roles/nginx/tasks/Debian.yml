@@ -13,19 +13,11 @@
 - name: blog directory
   file: path={{ docrootblog }} state=directory owner={{ username }} group={{ username }} mode=0755
 - name: ppap directory
-  file: path={{ docrootppap }} state=directory owner={{ username }} group={{ username }} mode=0755
+  file: path={{ docroot2 }} state=directory owner={{ username }} group={{ username }} mode=0755
 - name: jekyll directory
-  file: path={{ docrootjekyll }} state=directory owner={{ username }} group={{ username }} mode=0755
+  file: path={{ docroot3 }} state=directory owner={{ username }} group={{ username }} mode=0755
 - name: jekyll2 directory
-  file: path={{ docrootjekyll2 }} state=directory owner={{ username }} group={{ username }} mode=0755
-- name: lisp directory
-  file: path={{ docrootlisp }} state=directory owner={{ username }} group={{ username }} mode=0755
-- name: lisp2 directory
-  file: path={{ docrootlisp2 }} state=directory owner={{ username }} group={{ username }} mode=0755
-- name: lisp3 directory
-  file: path={{ docrootlisp3 }} state=directory owner={{ username }} group={{ username }} mode=0755
-- name: alias directory
-  file: path={{ docrootalias }} state=directory owner={{ username }} group={{ username }} mode=0755
+  file: path={{ docroot4 }} state=directory owner={{ username }} group={{ username }} mode=0755
 - name: render nginx.conf
   template: src=templates/nginx.conf.j2 dest=/etc/nginx/nginx.conf
   notify: restart nginx
@@ -39,7 +31,13 @@
   stat: path=/etc/letsencrypt/live/{{ subdomain }}/cert.pem
   register: cert_file
 - name: check cert
-  stat: path=/etc/letsencrypt/live/{{ mydomain }}/cert.pem
+  stat: path=/etc/letsencrypt/live/{{ domain2 }}/cert.pem
+  register: cert_file
+- name: check cert
+  stat: path=/etc/letsencrypt/live/{{ domain3 }}/cert.pem
+  register: cert_file
+- name: check cert
+  stat: path=/etc/letsencrypt/live/{{ domain4 }}/cert.pem
   register: cert_file
 - name: nginx stop
   become: yes
@@ -53,17 +51,17 @@
   become: yes
   command: certbot certonly --standalone -d {{ subdomain }} --agree-tos --renew-by-default -m {{ certbotmail }}
   when: not cert_file.stat.exists
-- name: create certificate {{ mydomain }}
+- name: create certificate {{ domain2 }}
   become: yes
-  command: certbot certonly --standalone -d {{ mydomain }} --agree-tos --renew-by-default -m {{ certbotmail }}
+  command: certbot certonly --standalone -d {{ domain2 }} --agree-tos --renew-by-default -m {{ certbotmail }}
   when: not cert_file.stat.exists
-- name: create certificate {{ mydomain2 }}
+- name: create certificate {{ domain3 }}
   become: yes
-  command: certbot certonly --standalone -d {{ mydomain2 }} --agree-tos --renew-by-default -m {{ certbotmail }}
+  command: certbot certonly --standalone -d {{ domain3 }} --agree-tos --renew-by-default -m {{ certbotmail }}
   when: not cert_file.stat.exists
-- name: create certificate {{ mydomain3 }}
+- name: create certificate {{ domain4 }}
   become: yes
-  command: certbot certonly --standalone -d {{ mydomain3 }} --agree-tos --renew-by-default -m {{ certbotmail }}
+  command: certbot certonly --standalone -d {{ domain4 }} --agree-tos --renew-by-default -m {{ certbotmail }}
   when: not cert_file.stat.exists
 - name: make nginx.service.d directory
   file:
