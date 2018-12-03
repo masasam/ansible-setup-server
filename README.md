@@ -83,8 +83,10 @@ What is in group_vars/server.yml (Write a password etc. here)
 
 	hostname: 'yourhost' ← Linux host name
 	domain: 'yourdomain' ← Main domain
-	subdomain: 'subdomain.yourdomain' ← sub domain(using blog)
-	mydomain: 'mydomain.yourdomain' ← sub domain(using lisp)
+	subdomain: 'subdomain.yourdomain'
+	domain2: 'www2.yourdomain'
+	domain3: 'www3.yourdomain'
+	domain4: 'www4.yourdomain'
 	username: 'ansible' ← User name ansible ssh
 	mailroot: 'youremailaddress' ← E-mail address to transfer root's mail
 	monitalert: 'youremailaddress' ← Destination of alert mail from monit
@@ -95,10 +97,9 @@ What is in group_vars/server.yml (Write a password etc. here)
 	dbpassword: 'yourdbpassword' ← That password
 	docroot: '/home/html' ← Main document route for nginx
 	docrootblog: '/home/blog' ← Document root of blog for nginx
-	docrootppap: '/home/ppap'
-	docrootjekyll: '/home/jekyll'
-	docrootjekyll2: '/home/jekyll2'
-	docrootlisp: '/home/lisp'
+	docroot2: '/home/html2'
+	docroot3: '/home/html3'
+	docroot4: '/home/html4'
 
 Infopassword will be the password for the email address of info@yourdomain
 How to make infopassword
