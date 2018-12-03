@@ -41,9 +41,9 @@ That is all.
 
 Create user to use with ansible as root
 
-	apt-get install python openssh-server zsh bash-completion sudo
-	useradd -m -G sudo -s /bin/zsh ansible
-	su - ansible
+	sudo apt-get install python openssh-server zsh bash-completion sudo
+	sudo useradd -m -G sudo -s /bin/zsh ansible
+	sudo su - ansible
 	ssh-keygen -t rsa -b 4096
 	cd .ssh/
 	mv id_rsa.pub authorized_keys
@@ -52,12 +52,12 @@ Create user to use with ansible as root
 
 Return to root
 
-	systemctl enable ssh
-	systemctl start ssh
+	sudo systemctl enable ssh
+	sudo systemctl start ssh
 
 Set host name
 
-	hostname debian
+	sudo hostname debian
 
 visudo
 
