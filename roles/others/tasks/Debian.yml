@@ -1,10 +1,5 @@
 - name: install others
-  apt: name={{ item }} state=present
+  apt:
+    name: ['bash-completion', 'htop', 'rsync', 'tmux', 'nmap', 'netcat-openbsd']
+    state: present
   when: ansible_os_family == 'Debian'
-  with_items:
-    - bash-completion
-    - htop
-    - rsync
-    - tmux
-    - nmap
-    - netcat-openbsd
