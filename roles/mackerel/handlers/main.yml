@@ -1,3 +1,0 @@
-- name: restart mackerel
-  systemd: name=mackerel state=restarted
-  become: yes

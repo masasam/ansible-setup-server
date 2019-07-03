@@ -83,7 +83,7 @@ What is in group_vars/server.yml (Write a password etc. here)
 
 	hostname: 'yourhost' ← Linux host name
 	domain: 'yourdomain' ← Main domain
-	subdomain: 'subdomain.yourdomain'
+	domain1: 'www1.yourdomain'
 	domain2: 'www2.yourdomain'
 	domain3: 'www3.yourdomain'
 	domain4: 'www4.yourdomain'
@@ -96,7 +96,7 @@ What is in group_vars/server.yml (Write a password etc. here)
 	dbname: 'yourdbbame' ← DB name used in mariadb
 	dbpassword: 'yourdbpassword' ← That password
 	docroot: '/home/html' ← Main document route for nginx
-	docrootblog: '/home/blog' ← Document root of blog for nginx
+	docroot1: '/home/html1'
 	docroot2: '/home/html2'
 	docroot3: '/home/html3'
 	docroot4: '/home/html4'

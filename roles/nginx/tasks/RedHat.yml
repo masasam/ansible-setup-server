@@ -11,7 +11,7 @@
 - name: html directory
   file: path={{ docroot }} state=directory owner={{ username }} group={{ username }} mode=0755
 - name: blog directory
-  file: path={{ docrootblog }} state=directory owner={{ username }} group={{ username }} mode=0755
+  file: path={{ docroot1 }} state=directory owner={{ username }} group={{ username }} mode=0755
 - name: ppap directory
   file: path={{ docrootppap }} state=directory owner={{ username }} group={{ username }} mode=0755
 - name: jekyll directory
@@ -32,7 +32,7 @@
   stat: path=/etc/letsencrypt/live/{{ domain }}/cert.pem
   register: cert_file
 - name: check cert
-  stat: path=/etc/letsencrypt/live/{{ subdomain }}/cert.pem
+  stat: path=/etc/letsencrypt/live/{{ domain1 }}/cert.pem
   register: cert_file
 - name: check cert
   stat: path=/etc/letsencrypt/live/{{ mydomain }}/cert.pem
@@ -45,9 +45,9 @@
   become: yes
   command: certbot certonly --standalone -d {{ domain }} --agree-tos --renew-by-default -m {{ certbotmail }}
   when: not cert_file.stat.exists
-- name: create certificate {{ subdomain }}
+- name: create certificate {{ domain1 }}
   become: yes
-  command: certbot certonly --standalone -d {{ subdomain }} --agree-tos --renew-by-default -m {{ certbotmail }}
+  command: certbot certonly --standalone -d {{ domain1 }} --agree-tos --renew-by-default -m {{ certbotmail }}
   when: not cert_file.stat.exists
 - name: create certificate {{ mydomain }}
   become: yes

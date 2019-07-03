@@ -1,4 +1,3 @@
 - name: include RedHat.yml
   include_tasks: RedHat.yml
   when: ansible_os_family == 'RedHat'
-  static: no
