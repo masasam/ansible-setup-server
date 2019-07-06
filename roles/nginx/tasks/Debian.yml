@@ -37,7 +37,7 @@
   stat: path=/etc/letsencrypt/live/{{ domain3 }}/cert.pem
   register: cert_file
 - name: check cert
-  stat: path=/etc/letsencrypt/live/{{ domain4 }}/cert.pem
+  stat: path=/etc/letsencrypt/live/{{ transfer }}/cert.pem
   register: cert_file
 - name: nginx stop
   become: yes
@@ -59,9 +59,9 @@
   become: yes
   command: certbot certonly --standalone -d {{ domain3 }} --agree-tos --renew-by-default -m {{ certbotmail }}
   when: not cert_file.stat.exists
-- name: create certificate {{ domain4 }}
+- name: create certificate {{ transfer }}
   become: yes
-  command: certbot certonly --standalone -d {{ domain4 }} --agree-tos --renew-by-default -m {{ certbotmail }}
+  command: certbot certonly --standalone -d {{ transfer }} --agree-tos --renew-by-default -m {{ certbotmail }}
   when: not cert_file.stat.exists
 - name: make nginx.service.d directory
   file:
