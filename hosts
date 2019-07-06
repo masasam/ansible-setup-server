@@ -1,9 +1,6 @@
 [server]
 instance ansible_python_interpreter=python2
 
-[dockercontainer]
-dockerhost ansible_python_interpreter=python2
-
 [dbserver]
 dbhost ansible_python_interpreter=python2
 
