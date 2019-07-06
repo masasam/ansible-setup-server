@@ -212,8 +212,8 @@ server {
 
 server {
     listen 80;
-    server_name {{ domain4 }};
-    return  301 https://{{ domain4 }}$request_uri;
+    server_name {{ transfer }};
+    return  301 https://{{ transfer }}$request_uri;
     location / {
         root {{ docroot4 }};
 	index	index.html index.htm;
