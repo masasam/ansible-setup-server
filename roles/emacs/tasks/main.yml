@@ -1,9 +1,0 @@
-- name: include Archlinux.yml
-  include_tasks: Archlinux.yml
-  when: ansible_os_family == 'Archlinux'
-- name: include Debian.yml
-  include_tasks: Debian.yml
-  when: ansible_os_family == 'Debian'
-- name: include RedHat.yml
-  include_tasks: RedHat.yml
-  when: ansible_os_family == 'RedHat'
