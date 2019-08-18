@@ -1,7 +1,7 @@
 ## Preparing the server you want to provision with ansible
 
 Target OS at the server
-- Debian9 stretch(Recommended)
+- Debian10 buster(Recommended)
 - Centos7(Not doing much maintenance)
 - Archlinux(-_-;)
 
@@ -92,7 +92,6 @@ What is in group_vars/server.yml (Write a password etc. here)
 	monitalert: 'youremailaddress' ← Destination of alert mail from monit
 	infopassword: '1e3396a8ecbc77a4cd81145c2c6b'
 	mariadbrootpassword: 'mariadbrootpassword' ← The password of the mariadb root user
-	mackerelapikey: 'yourmackerelapikey' ← mackerel's apikey
 	dbname: 'yourdbbame' ← DB name used in mariadb
 	dbpassword: 'yourdbpassword' ← That password
 	docroot: '/home/html' ← Main document route for nginx
@@ -126,7 +125,7 @@ Because it is
 	yaourt -S debian-archive-keyring
 
 	mkdir debian
-	sudo debootstrap stretch debian http://ftp.jaist.ac.jp/pub/Linux/debian/
+	sudo debootstrap buster debian http://ftp.jaist.ac.jp/pub/Linux/debian/
 
 	sudo chroot debian
 	passwd root
