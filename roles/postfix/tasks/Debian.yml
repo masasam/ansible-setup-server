@@ -7,7 +7,6 @@
     dest=/etc/postfix/main.cf
 - name: render vmailbox
   template: src=templates/vmailbox.j2 dest=/etc/postfix/vmailbox
-  notify: Restart conditionally
 - name: deploy master.cf
   copy:
     src: master.cf
