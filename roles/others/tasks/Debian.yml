@@ -1,5 +1,5 @@
 - name: install others
   apt:
-    name: ['bash-completion', 'htop', 'rsync', 'tmux', 'nmap', 'netcat-openbsd']
+    name: ['bash-completion', 'htop', 'rsync', 'tmux', 'nmap', 'netcat-openbsd', 'gawk']
     state: present
   when: ansible_os_family == 'Debian'
