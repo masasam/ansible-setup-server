@@ -1,6 +1,7 @@
 ## Preparing the server you want to provision with ansible
 
 Target OS at the server
+
 - Debian10 buster(Recommended)
 - Centos7(Not doing much maintenance)
 - Archlinux(-_-;)
